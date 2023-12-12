@@ -1,0 +1,25 @@
+{
+    "name": "scern/lira",
+    "description": "Lira: Small PHP framework",
+    "version": "7.3.0",
+    "type": "project",
+    "require": {
+        "symfony/http-foundation": "^7.0",
+        "ext-json": "*",
+        "monolog/monolog": "^3.5"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Scern\\Lira\\": "core/",
+            "Scern\\Lira\\Application\\": "application/",
+            "Scern\\Lira\\Component\\": "component/"
+        }
+    },
+    "authors": [
+        {
+            "name": "scern"
+        }
+    ],
+    "minimum-stability": "stable"
+}
