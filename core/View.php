@@ -11,13 +11,23 @@ class View
 
     private array $values = [];
 
+    protected ?string $template = null;
+
     public function __construct(protected Lexicon $lexicon)
     {
         $this->appendOnly = false;
     }
 
-    public function render(string $template): string
+    public function setTemplate(string $template): void
     {
+        if(!file_exists($template)) throw new \Exception('File not exists');
+        $this->template = $template;
+    }
+
+    public function render(?string $template=null): string
+    {
+        if(is_null($template) && !is_null($this->template)) $template = $this->template;
+        if(is_null($template))  throw new \Exception('Template not set');
         if(!file_exists($template)) throw new \Exception('File not exists');
         ob_start();
         include $template;

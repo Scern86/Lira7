@@ -28,11 +28,19 @@ class Application
         switch ($result::class){
             case Success::class:
                 $this->view->content = $result->content;
-                $content = $this->view->render(ROOT_DIR.DS.'component'.DS.'Front'.DS.'Templates'.DS.'default.inc');
+                try{
+                    $content = $this->view->render();
+                }catch (\Throwable $e){
+                    $content = '';
+                }
                 return new Success($content,$result->statusCode,$result->headers);
             case Error::class:
                 $this->view->content = $result->content;
-                $content = $this->view->render(ROOT_DIR.DS.'component'.DS.'Front'.DS.'Templates'.DS.'error.inc');
+                try{
+                    $content = $this->view->render();
+                }catch (\Throwable $e){
+                    $content = '';
+                }
                 return new Error($content,$result->statusCode,$result->headers);
             case Json::class:
             case Redirect::class:
