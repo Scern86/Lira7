@@ -13,7 +13,7 @@ class Application
 {
     const VERSION = '7.3.0';
 
-    public function __construct(protected Config $config,protected Request $request,protected Router $router,protected View $view,protected Lexicon $lexicon,protected Extensions $extensions)
+    public function __construct(protected Config $config, protected Request $request, protected Router $router, protected View $view, protected Lexicon $lexicon, protected Extensions $extensions)
     {
     }
 
@@ -21,34 +21,14 @@ class Application
     {
         $controllerClass = $this->router->execute($requestUri);
 
-        $controller = new $controllerClass($this->config,$this->request,$this->view,$this->lexicon,$this->extensions);
+        $controller = new $controllerClass($this->config, $this->request, $this->view, $this->lexicon, $this->extensions);
 
         $result = $controller->execute($requestUri);
 
-        switch ($result::class){
-            case Success::class:
-                $this->view->content = $result->content;
-                try{
-                    $content = $this->view->render();
-                }catch (\Throwable $e){
-                    $content = '';
-                }
-                return new Success($content,$result->statusCode,$result->headers);
-            case Error::class:
-                $this->view->content = $result->content;
-                try{
-                    $content = $this->view->render();
-                }catch (\Throwable $e){
-                    $content = '';
-                }
-                return new Error($content,$result->statusCode,$result->headers);
-            case Json::class:
-            case Redirect::class:
-                return $result;
-            case InternalRedirect::class:
-                return $this->execute($result->url);
-            default:
-                return new Error('Application error');
-        }
+        return match ($result::class) {
+            Success::class, Error::class, Json::class, Redirect::class => $result,
+            InternalRedirect::class => $this->execute($result->url),
+            default => new Error('Application error')
+        };
     }
 }
