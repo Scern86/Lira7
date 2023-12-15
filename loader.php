@@ -3,11 +3,11 @@
 require_once 'vendor' . DS . 'autoload.php';
 
 use Scern\Lira\Application\{Application, Extensions};
-use Scern\Lira\Application\Result\{Error, InternalRedirect, Json, Redirect, Success};
+use Scern\Lira\Application\Result\{Error, Json, Redirect, Success};
 use Scern\Lira\Config\{Config, PhpFile};
 use Scern\Lira\Extensions\{LoggerManager};
 use Scern\Lira\Lexicon\{Lang, Lexicon};
-use Scern\Lira\{Router, View};
+use Scern\Lira\{Router, View,User};
 use Symfony\Component\HttpFoundation\{Request, JsonResponse, RedirectResponse, Response};
 
 $request = Request::createFromGlobals();
@@ -16,15 +16,14 @@ $extensions = new Extensions();
 
 $config = new Config();
 $config->set('routes', new PhpFile(ROOT_DIR . DS . 'config' . DS . 'routes.php'));
-//$config->set('routes-front',new PhpFile(ROOT_DIR.DS.'component'.DS.'Front'.DS.'routes.php'));
 $config->set('main', new PhpFile(ROOT_DIR . DS . 'config' . DS . 'main.php'));
-//$extensions->setConfig($config);
-
 $logger = new LoggerManager();
 $logger->set(new \Monolog\Logger('Error', [new \Monolog\Handler\StreamHandler(LOG_DIR . DS . 'error.log', \Monolog\Level::Warning)]));
 $extensions->setLoggerManager($logger);
 
 $lexicon = new Lexicon(new Lang($config->get('main')['default_language']));
+
+$user = new User();
 
 $app = new Application(
     $config,
@@ -32,8 +31,10 @@ $app = new Application(
     new Router(\Scern\Lira\Component\DefaultController::class, $config->get('routes')),
     new View($lexicon),
     $lexicon,
+    $user,
     $extensions
 );
+
 
 $result = $app->execute($request->getPathInfo());
 try {
@@ -44,8 +45,7 @@ try {
         default => new Exception('Invalid result')
     };
 } catch (Throwable $e) {
-    $error = new Error('Server error', Response::HTTP_INTERNAL_SERVER_ERROR);
-    $response = new Response($error->content, $error->statusCode, $error->headers);
+    $response = new Response($e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
 }
 
 $response->send();
