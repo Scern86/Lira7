@@ -23,9 +23,4 @@ class Lexicon
     {
         $this->lexicon = array_merge($this->lexicon,$lexicon);
     }
-
-    /*public function makeLangUrl(string $url): string
-    {
-        return '/'.ltrim($this->currentLang->code==$this->defaultLang->code ? $url : '/'.$this->currentLang->code.$url,'/');
-    }*/
 }

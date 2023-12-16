@@ -1,5 +1,6 @@
+# Lira
 <a href="https://github.com/Scern86/Lira7/releases"><img src="https://img.shields.io/github/release/Scern86/Lira7.svg" alt="GitHub release"></a>
-# Lira7
+
 A small PHP framework for prototyping and developing web applications.
 
 # Feature list:

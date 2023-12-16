@@ -7,37 +7,40 @@ use Scern\Lira\Application\Result\{Error, Json, Redirect, Success};
 use Scern\Lira\Config\{Config, PhpFile};
 use Scern\Lira\Extensions\{LoggerManager};
 use Scern\Lira\Lexicon\{Lang, Lexicon};
-use Scern\Lira\{Router, View,User};
+use Scern\Lira\{Router, View, User};
 use Symfony\Component\HttpFoundation\{Request, JsonResponse, RedirectResponse, Response};
 
-$request = Request::createFromGlobals();
-
-$extensions = new Extensions();
-
-$config = new Config();
-$config->set('routes', new PhpFile(ROOT_DIR . DS . 'config' . DS . 'routes.php'));
-$config->set('main', new PhpFile(ROOT_DIR . DS . 'config' . DS . 'main.php'));
-$logger = new LoggerManager();
-$logger->set(new \Monolog\Logger('Error', [new \Monolog\Handler\StreamHandler(LOG_DIR . DS . 'error.log', \Monolog\Level::Warning)]));
-$extensions->setLoggerManager($logger);
-
-$lexicon = new Lexicon(new Lang($config->get('main')['default_language']));
-
-$user = new User();
-
-$app = new Application(
-    $config,
-    $request,
-    new Router(\Scern\Lira\Component\DefaultController::class, $config->get('routes')),
-    new View($lexicon),
-    $lexicon,
-    $user,
-    $extensions
-);
-
-
-$result = $app->execute($request->getPathInfo());
 try {
+    $request = Request::createFromGlobals();
+
+    $extensions = new Extensions();
+
+    $config = new Config();
+    $config->set('main', new PhpFile(ROOT_DIR . DS . 'config' . DS . 'main.php'));
+    $logger = new LoggerManager();
+    $logger->set(
+        new \Monolog\Logger('Error',
+            [new \Monolog\Handler\StreamHandler(LOG_DIR . DS . 'error.log', \Monolog\Level::Warning)]
+        )
+    );
+    $extensions->setLoggerManager($logger);
+
+    $defaultLanguage = $config->get('main')['default_language'] ?? null;
+    $lexicon = new Lexicon(new Lang($defaultLanguage));
+
+    $app = new Application(
+        $config,
+        $request,
+        new Router(
+            \Scern\Lira\Component\DefaultController::class,
+            (new PhpFile(ROOT_DIR . DS . 'config' . DS . 'routes.php'))->getArray()
+        ),
+        new View($lexicon),
+        $lexicon,
+        new User(),
+        $extensions
+    );
+    $result = $app->execute($request->getPathInfo());
     $response = match ($result::class) {
         Success::class, Error::class => new Response($result->content, $result->statusCode, $result->headers),
         Json::class => new JsonResponse($result->data, $result->statusCode, $result->headers),

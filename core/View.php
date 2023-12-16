@@ -34,4 +34,12 @@ class View
         $result = ob_get_clean();
         return $result;
     }
+
+    public function makeLangUrl(string $url): string
+    {
+        $url = ($this->lexicon->currentLang->code==$this->lexicon->defaultLang->code ? '' : '/'.$this->lexicon->currentLang->code).$url;
+        if(empty($url)) $url = '/';
+        else $url = rtrim($url,'/');
+        return $url;
+    }
 }
