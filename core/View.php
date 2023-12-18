@@ -37,9 +37,11 @@ class View
 
     public function makeLangUrl(string $url): string
     {
-        $url = ($this->lexicon->currentLang->code==$this->lexicon->defaultLang->code ? '' : '/'.$this->lexicon->currentLang->code).$url;
-        if(empty($url)) $url = '/';
-        else $url = rtrim($url,'/');
+        $lang = $this->lexicon->currentLang->code==$this->lexicon->defaultLang->code ? '' : $this->lexicon->currentLang->code;
+        if(!empty($lang)){
+            if($url=='/') $url = '/'.$lang;
+            else $url = '/'.$lang.$url;
+        }
         return $url;
     }
 }
