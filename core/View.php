@@ -35,7 +35,7 @@ class View
         return $result;
     }
 
-    public function makeLangUrl(string $url): string
+    public function makeLink(string $url): string
     {
         $lang = $this->lexicon->currentLang->code==$this->lexicon->defaultLang->code ? '' : $this->lexicon->currentLang->code;
         if(!empty($lang)){
