@@ -8,6 +8,8 @@ use Scern\Lira\Config\{Config, PhpFile};
 use Scern\Lira\Extensions\{LoggerManager};
 use Scern\Lira\Lexicon\{Lang, Lexicon};
 use Scern\Lira\{Router, View, User};
+use Scern\Lira\AccessControl\AccessManager;
+use \Scern\Lira\State\StateManager;
 use Symfony\Component\HttpFoundation\{Request, JsonResponse, RedirectResponse, Response};
 
 try {
@@ -37,7 +39,7 @@ try {
         ),
         new View($lexicon),
         $lexicon,
-        new User(),
+        new User(new AccessManager(),new StateManager()),
         $extensions
     );
     $result = $app->execute($request->getPathInfo());
