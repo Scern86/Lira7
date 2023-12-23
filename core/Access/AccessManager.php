@@ -1,6 +1,6 @@
 <?php
 
-namespace Scern\Lira\AccessControl;
+namespace Scern\Lira\Access;
 
 class AccessManager
 {

@@ -6,7 +6,7 @@ use Scern\Lira\Application\Result\{Error, InternalRedirect, Json, Redirect, Resu
 use Scern\Lira\Config\Config;
 use Scern\Lira\Lexicon\Lexicon;
 use Scern\Lira\Router;
-use Scern\Lira\{State\StateManager, View, User};
+use Scern\Lira\{State\StateStrategy, View, User};
 use Symfony\Component\HttpFoundation\Request;
 
 class Application
@@ -14,14 +14,14 @@ class Application
     const VERSION = '7.3.0';
 
     public function __construct(
-        protected StateManager $stateManager,
-        protected Config $config,
-        protected Request $request,
-        protected Router $router,
-        protected View $view,
-        protected Lexicon $lexicon,
-        protected User $user,
-        protected Extensions $extensions
+        protected StateStrategy $stateManager,
+        protected Config        $config,
+        protected Request       $request,
+        protected Router        $router,
+        protected View          $view,
+        protected Lexicon       $lexicon,
+        protected User          $user,
+        protected Extensions    $extensions
     )
     {
     }
