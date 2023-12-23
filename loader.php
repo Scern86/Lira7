@@ -15,6 +15,8 @@ use Symfony\Component\HttpFoundation\{Request, JsonResponse, RedirectResponse, R
 try {
     $request = Request::createFromGlobals();
 
+    $stateManager = new StateManager();
+
     $extensions = new Extensions();
 
     $config = new Config();
@@ -31,6 +33,7 @@ try {
     $lexicon = new Lexicon(new Lang($defaultLanguage));
 
     $app = new Application(
+        $stateManager,
         $config,
         $request,
         new Router(
@@ -39,7 +42,7 @@ try {
         ),
         new View($lexicon),
         $lexicon,
-        new User(new AccessManager(),new StateManager()),
+        new User(new AccessManager(),$stateManager),
         $extensions
     );
     $result = $app->execute($request->getPathInfo());
