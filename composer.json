@@ -6,7 +6,8 @@
     "require": {
         "symfony/http-foundation": "^7.0",
         "ext-json": "*",
-        "monolog/monolog": "^3.5"
+        "monolog/monolog": "^3.5",
+        "ext-pdo": "*"
     },
     "license": "MIT",
     "autoload": {

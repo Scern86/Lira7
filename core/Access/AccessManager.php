@@ -4,8 +4,11 @@ namespace Scern\Lira\Access;
 
 class AccessManager
 {
-
-    public function __construct(protected array $rules=[])
+    /**
+     * @param array $rules
+     * @param bool $open, return this if empty rules
+     */
+    public function __construct(protected array $rules=[], protected bool $open=false)
     {
     }
 
@@ -17,6 +20,6 @@ class AccessManager
             }
             return false;
         }
-        return true;
+        return $this->open;
     }
 }

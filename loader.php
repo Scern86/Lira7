@@ -9,13 +9,13 @@ use Scern\Lira\Extensions\{LoggerManager};
 use Scern\Lira\Lexicon\{Lang, Lexicon};
 use Scern\Lira\{Router, View, User};
 use Scern\Lira\Access\AccessManager;
-use \Scern\Lira\State\StateStrategy;
+use \Scern\Lira\State\SessionState;
 use Symfony\Component\HttpFoundation\{Request, JsonResponse, RedirectResponse, Response};
 
 try {
     $request = Request::createFromGlobals();
 
-    $stateManager = new \Scern\Lira\State\SessionState();
+    $stateManager = new SessionState();
 
     $extensions = new Extensions();
 
@@ -28,6 +28,19 @@ try {
         )
     );
     $extensions->setLoggerManager($logger);
+
+    $dbManager = new \Scern\Lira\Extensions\Database\DatabaseManager();
+    /*$dbManager->set(
+        'postgres',
+        new \Scern\Lira\Extensions\Database\Adapters\Postgresql(
+            '192.168.2.253',
+            5432,
+            'scern',
+            'scern_dbuser',
+            '1qaz@WSX'
+        )
+    );*/
+    $extensions->setDatabaseManager($dbManager);
 
     $defaultLanguage = $config->get('main')['default_language'] ?? null;
     $lexicon = new Lexicon(new Lang($defaultLanguage));
@@ -42,7 +55,7 @@ try {
         ),
         new View($lexicon),
         $lexicon,
-        new User(new AccessManager(),$stateManager),
+        new User(new AccessManager([],true),$stateManager),
         $extensions
     );
     $result = $app->execute($request->getPathInfo());
