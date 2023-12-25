@@ -1,5 +1,5 @@
 # Lira
-<a href="https://github.com/Scern86/Lira7/releases"><img src="https://img.shields.io/github/release/Scern86/Lira7.svg" alt="GitHub release"></a>
+<a href="https://github.com/Scern86/Lira/releases"><img src="https://img.shields.io/github/release/Scern86/Lira.svg" alt="GitHub release"></a>
 
 A small PHP framework for prototyping and developing web applications.
 
