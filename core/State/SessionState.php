@@ -8,10 +8,14 @@ class SessionState implements StateStrategy
 {
     use Getter;
     protected array $values = [];
-    public function load(): void
+
+    public readonly string $stateId;
+
+    public function init(): void
     {
         session_start();
         $this->values = $_SESSION;
+        $this->stateId = session_id();
         session_write_close();
     }
 

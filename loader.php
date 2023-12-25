@@ -10,6 +10,7 @@ use Scern\Lira\Lexicon\{Lang, Lexicon};
 use Scern\Lira\{Router, View, User};
 use Scern\Lira\Access\AccessManager;
 use \Scern\Lira\State\SessionState;
+use \Scern\Lira\Extensions\Database\DatabaseManager;
 use Symfony\Component\HttpFoundation\{Request, JsonResponse, RedirectResponse, Response};
 
 try {
@@ -21,6 +22,8 @@ try {
 
     $config = new Config();
     $config->set('main', new PhpFile(ROOT_DIR . DS . 'config' . DS . 'main.php'));
+    $config->set('database', new PhpFile(ROOT_DIR . DS . 'config' . DS . 'database.php'));
+
     $logger = new LoggerManager();
     $logger->set(
         new \Monolog\Logger('Error',
@@ -29,17 +32,8 @@ try {
     );
     $extensions->setLoggerManager($logger);
 
-    $dbManager = new \Scern\Lira\Extensions\Database\DatabaseManager();
-    /*$dbManager->set(
-        'postgres',
-        new \Scern\Lira\Extensions\Database\Adapters\Postgresql(
-            '192.168.2.253',
-            5432,
-            'scern',
-            'scern_dbuser',
-            '1qaz@WSX'
-        )
-    );*/
+    $dbManager = new DatabaseManager();
+
     $extensions->setDatabaseManager($dbManager);
 
     $defaultLanguage = $config->get('main')['default_language'] ?? null;
