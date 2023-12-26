@@ -2,7 +2,7 @@
 
 namespace Scern\Lira;
 
-class Model
+abstract class Model
 {
 
 }
