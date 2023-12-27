@@ -3,16 +3,28 @@
 namespace Scern\Lira;
 
 use Scern\Lira\Access\AccessManager;
+use Scern\Lira\Access\{Group,Role};
 use Scern\Lira\State\StateStrategy;
 
-readonly class User
+class User
 {
-    public function __construct(protected AccessManager $accessManager, protected StateStrategy $stateManager, public bool $isGuest=true)
+    protected array $groups;
+    protected array $roles;
+    public function __construct(protected AccessManager $accessManager, protected StateStrategy $stateManager, public readonly bool $isGuest=true)
     {
     }
 
     public function isMethodAllowed(string $method): bool
     {
         return $this->accessManager->isAllowed($method);
+    }
+
+    public function addGroup(Group $group): void
+    {
+        $this->groups[$group->name] = $group;
+    }
+    public function addRole(Role $role): void
+    {
+        $this->roles[$role->name] = $role;
     }
 }
