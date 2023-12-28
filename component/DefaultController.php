@@ -9,6 +9,6 @@ class DefaultController extends Controller
 {
     public function execute(string $url): Result
     {
-        return new Success('Default');
+        return new Success('404 Not found');
     }
 }

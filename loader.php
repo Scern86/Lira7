@@ -49,7 +49,7 @@ try {
         ),
         new View($lexicon),
         $lexicon,
-        new User(new AccessManager([],true),$stateManager),
+        new User(new AccessManager([], true), $stateManager),
         $extensions
     );
     $result = $app->execute($request->getPathInfo());

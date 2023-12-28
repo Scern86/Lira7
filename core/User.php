@@ -27,4 +27,13 @@ class User
     {
         $this->roles[$role->name] = $role;
     }
+
+    public function login(string $login,string $password): bool
+    {
+        return false;
+    }
+
+    public function logout(): void
+    {
+    }
 }
