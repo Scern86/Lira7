@@ -10,7 +10,7 @@
     <meta name="description" content="<?=$this->meta_description;?>">
     <meta name="keywords" content="<?=$this->meta_keyword;?>">
     <link rel="icon" href="/favicon.ico?v0">
-    <link rel="stylesheet" href="/assets/css/style.min.css">
+    <link rel="stylesheet" href="/assets/css/style.min.css?<?=time();?>">
 </head>
 <body>
     <header>

@@ -1,3 +1,14 @@
+root{
+  --white: 255,255,255;
+  box-sizing: border-box;
+}
+
+$phone: 320px;
+$tab: 768px;
+$desktop: 1140px;
+
+@import "_mixins.scss";
+
 html,body{
   margin:0;
   padding:0;
@@ -41,11 +52,17 @@ main{
 }
 main .wrapper{
   width: 100%;
-  max-width: 1140px;
+  max-width: 290px;
   margin:10px auto;
   background-color: #fff;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   padding: 20px;
+  @include breakpointMin(tab) {
+    max-width: 748px;
+  }
+  @include breakpointMin(desktop) {
+    max-width: 1120px;
+  }
 }
 .lang-select{
   display: flex;

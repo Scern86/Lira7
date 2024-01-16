@@ -4,6 +4,7 @@ namespace Scern\Lira\Component\Admin\Article;
 
 use Scern\Lira\Application\Controller;
 use Scern\Lira\Application\Result\{Error, Redirect, Result, Success};
+use Scern\Lira\Application\Models\Role;
 use Scern\Lira\View;
 
 class Article extends Controller

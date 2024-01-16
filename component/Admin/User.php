@@ -20,7 +20,14 @@ class User extends \Scern\Lira\User
             else $isGuest = true;
         }
         else $isGuest = true;
+        // TODO Load list rules from DB
+        $rules = [
+            'Scern\Lira\Component\Admin\Article\Article::_add'=>false,
+            'Scern\Lira\Component\Admin\Article\Article::_edit'=>true,
+            'Scern\Lira\Component\Admin\Article\Article::_list'=>true,
+        ];
         parent::__construct($accessManager,$stateManager,$isGuest);
+        $this->accessManager->addRules($rules);
     }
 
     public function login(string $login, string $password): bool

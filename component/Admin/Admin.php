@@ -22,17 +22,12 @@ class Admin extends Controller
         protected Extensions    $extensions
     )
     {
-        $rules = [
-            'Scern\Lira\Component\Admin\Article\Article::_add'=>true,
-            'Scern\Lira\Component\Admin\Article\Article::_edit'=>false,
-            'Scern\Lira\Component\Admin\Article\Article::_list'=>true,
-        ];
         $dbManager = $this->extensions->getDatabaseManager();
         $dbManager->set(
             'database',
             new Postgresql(...$this->config->get('database'))
         );
-        $this->user = new \Scern\Lira\Component\Admin\User(new AccessManager($rules),$stateManager,$dbManager,$this->request->getClientIp());
+        $this->user = new \Scern\Lira\Component\Admin\User(new AccessManager(),$stateManager,$dbManager,$this->request->getClientIp());
         parent::__construct($stateManager,$config, $request, $view, $lexicon, $this->user, $extensions);
         $this->view->setTemplate(ROOT_DIR . DS . 'component' . DS . 'Admin' . DS . 'template.inc');
     }

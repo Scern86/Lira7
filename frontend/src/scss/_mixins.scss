@@ -1,0 +1,14 @@
+@mixin breakpointMin($point) {
+  @if $point == phone {
+    @media (min-width: $phone) { @content ; }
+  }
+  @else if $point == tab{
+    @media (min-width: $tab) { @content ; }
+  }
+  @else if $point == desktop {
+    @media (min-width: $desktop) { @content ; }
+  }
+  @else {
+    @media (min-width: $point) { @content ; }
+  }
+}

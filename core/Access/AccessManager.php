@@ -22,4 +22,9 @@ class AccessManager
         }
         return $this->open;
     }
+
+    public function addRules(array $rules): void
+    {
+        $this->rules += $rules;
+    }
 }
