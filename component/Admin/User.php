@@ -22,7 +22,7 @@ class User extends \Scern\Lira\User
         else $isGuest = true;
         // TODO Load list rules from DB
         $rules = [
-            'Scern\Lira\Component\Admin\Article\Article::_add'=>false,
+            'Scern\Lira\Component\Admin\Article\Article::_add'=>true,
             'Scern\Lira\Component\Admin\Article\Article::_edit'=>true,
             'Scern\Lira\Component\Admin\Article\Article::_list'=>true,
         ];

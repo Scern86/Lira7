@@ -5,22 +5,20 @@
 <table width="100%" border="1" cellpadding="1px" cellspacing="1px">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>Created</th>
+            <th width="40">ID</th>
+            <th width="80">Created</th>
             <th>Title</th>
-            <th>Author</th>
-            <th></th>
+            <th width="80"></th>
         </tr>
     </thead>
     <tbody>
-        <?php foreach (range(1,20) as $item){ ?>
-            <tr>
-                <td><?=$item;?></td>
-                <td><?=date('d-m-Y');?></td>
-                <td><?=crc32(time());?></td>
-                <td><?=str_shuffle(crc32(time()));?></td>
-                <th><a href="<?=$this->makeLink('/admin/article/edit/'.$item);?>">Edit</a></th>
-            </tr>
+        <?php if(!empty($this->listArticles)) foreach ($this->listArticles as $article){?>
+           <tr>
+               <td><?=$article['id'];?></td>
+               <td><?=date('d-m-Y',strtotime($article['created']));?></td>
+               <td><?=$article['title'];?></td>
+               <td><a href="<?=$this->makeLink('/admin/article/edit/'.$article['id']);?>">Edit</a></td>
+           </tr>
         <?php } ?>
     </tbody>
 </table>
