@@ -5,11 +5,12 @@ namespace Scern\Lira\Application;
 use Scern\Lira\Application\Result\Result;
 use Scern\Lira\Config\Config;
 use Scern\Lira\Lexicon\Lexicon;
-use Scern\Lira\{State\StateStrategy, View, User};
+use Scern\Lira\{Model, State\StateStrategy, View, User};
 use Symfony\Component\HttpFoundation\Request;
 
 abstract class Controller
 {
+    protected Model $model;
     public function __construct(
         protected StateStrategy $stateManager,
         protected Config        $config,

@@ -21,6 +21,7 @@
         </div>
         <ul class="nav">
             <li><a href="<?=$this->makeLink('/');?>">Home</a></li>
+            <li><a href="<?=$this->makeLink('/about');?>">About</a></li>
             <li><a href="<?=$this->makeLink('/catalog');?>">Catalog</a></li>
             <li><a href="<?=$this->makeLink('/profile');?>">Profile</a></li>
             <li><a href="<?=$this->makeLink('/test');?>">Test redirect</a></li>

@@ -6,30 +6,12 @@ use Scern\Lira\{Router, State\StateStrategy, View, User};
 use Scern\Lira\Application\{Controller, Extensions};
 use Scern\Lira\Application\Result\{Error, InternalRedirect, Json, Redirect, Result, Success};
 use Scern\Lira\Config\{Config, PhpFile};
-use Scern\Lira\Lexicon\Lexicon;
-use Symfony\Component\HttpFoundation\Request;
 
 class Front extends Controller
 {
-    public function __construct(
-        protected StateStrategy $stateManager,
-        protected Config        $config,
-        protected Request       $request,
-        protected View          $view,
-        protected Lexicon       $lexicon,
-        protected User          $user,
-        protected Extensions    $extensions
-    )
+    public function __construct(...$args)
     {
-        parent::__construct(
-            $stateManager,
-            $config,
-            $request,
-            $view,
-            $lexicon,
-            $user,
-            $extensions
-        );
+        parent::__construct(...$args);
         $this->config->set('routes-front',new PhpFile(ROOT_DIR . DS . 'component' . DS . 'Front' . DS . 'routes.php'));
     }
 

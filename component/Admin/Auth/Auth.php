@@ -11,17 +11,9 @@ use Symfony\Component\HttpFoundation\Request;
 
 class Auth extends Controller
 {
-    public function __construct(
-        protected StateStrategy $stateManager,
-        protected Config        $config,
-        protected Request       $request,
-        protected View          $view,
-        protected Lexicon       $lexicon,
-        protected User          $user,
-        protected Extensions    $extensions
-    )
+    public function __construct(...$args)
     {
-        parent::__construct($stateManager,$config, $request, $view, $lexicon, $user, $extensions);
+        parent::__construct(...$args);
         $this->view->setTemplate(ROOT_DIR . DS . 'component' . DS . 'Admin' . DS . 'Auth' . DS . 'login.inc');
     }
 

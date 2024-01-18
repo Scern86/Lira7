@@ -11,19 +11,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class Dashboard extends Controller
 {
-    public function __construct(
-        protected StateStrategy $stateManager,
-        protected Config        $config,
-        protected Request       $request,
-        protected View          $view,
-        protected Lexicon       $lexicon,
-        protected User          $user,
-        protected Extensions    $extensions
-    )
-    {
-        parent::__construct($stateManager,$config, $request, $view, $lexicon, $user, $extensions);
-    }
-
     public function execute(string $url): Result
     {
         if($this->user->isGuest) return new Redirect($this->view->makeLink('/admin/login'));

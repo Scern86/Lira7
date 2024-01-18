@@ -45,6 +45,7 @@
     <footer style="width:100%;position: absolute;bottom: 0;left:0;height: 50px;background-color: dimgrey;display: flex;justify-content: space-between;align-items: center">
         <ul style="display: flex;gap: 10px;list-style: none">
             <li><a href="<?=$this->makeLink('/');?>">Home</a></li>
+            <li><a href="<?=$this->makeLink('/about');?>">About</a></li>
             <li><a href="<?=$this->makeLink('/catalog');?>">Catalog</a></li>
             <li><a href="<?=$this->makeLink('/profile');?>">Profile</a></li>
             <li><a href="<?=$this->makeLink('/test');?>">Test redirect</a></li>

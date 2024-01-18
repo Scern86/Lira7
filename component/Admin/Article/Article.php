@@ -19,17 +19,9 @@ class Article extends Controller
 {
     const TEMPLATES_DIR = ROOT_DIR.DS.'component'.DS.'Admin'.DS.'Article'.DS.'templates';
     protected \Scern\Lira\Model $model;
-    public function __construct(
-        protected StateStrategy $stateManager,
-        protected Config        $config,
-        protected Request       $request,
-        protected View          $view,
-        protected Lexicon       $lexicon,
-        protected User          $user,
-        protected Extensions    $extensions
-    )
+    public function __construct(...$args)
     {
-        parent::__construct($stateManager,$config, $request, $view, $lexicon, $this->user, $extensions);
+        parent::__construct(...$args);
         $this->model = new Model($this->extensions->getDatabaseManager()->get('database'));
     }
 
