@@ -1,8 +1,17 @@
 const init = function (defaultLang){
-    $('body').on('click','.lang:not(.active)',e=>{
+    $('body')
+        .on('click','.lang:not(.active)',e=>{
         let currentLang = $('.lang.active').data('lang'),
             selectedLang = $(e.target).data('lang');
-        changeLang(selectedLang,defaultLang,currentLang);
+        changeLang(selectedLang,defaultLang,currentLang)
+    })
+    .on('click','.mobile-menu-btn',()=>{
+        $('header .nav').addClass('active');
+        $('body').css({'overflow':'hidden'});
+    })
+    .on('click','header .nav',e=>{
+        $('header .nav').removeClass('active');
+        $('body').css({'overflow':'visible'});
     });
 };
 

@@ -1,0 +1,23 @@
+main{
+  min-height: 70vh;
+  @include breakpointMin(md) {
+    padding: 0 10px;
+  }
+  @include breakpointMin(xl) {
+    max-width: 1140px;
+    margin: 0 auto;
+  }
+  & .wrapper{
+    box-sizing: border-box;
+    width: 100%;
+    padding:20px;
+    font-weight: 300;
+    @include breakpointMin(md) {
+      box-shadow: 0 0 5px rgba(var(--color-black),.2);
+
+    }
+    @include breakpointMin(xl) {
+
+    }
+  }
+}

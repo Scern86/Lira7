@@ -1,95 +1,43 @@
-root{
-  --white: 255,255,255;
-  box-sizing: border-box;
+:root{
+  --color-white: 255,255,255;
+  --color-light: 187,187,187;
+  --color-orange:255,152,0;
+  --color-dark: 51,51,51;
+  --color-black: 0,0,0;
 }
-
-$phone: 320px;
-$tab: 768px;
-$desktop: 1140px;
-
-@import "_mixins.scss";
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Roboto:wght@100;300;400;500;700&display=swap');
 
 html,body{
   margin:0;
   padding:0;
-  font-family: Arial, sans-serif;
+  font-family: 'Open Sans',sans-serif;
 }
-header {
-  background-color: #333;
-  color: #fff;
-  text-align: center;
-  padding: 20px 0;
+body{
+  position: relative;
+}
+html,body,div.content,header,main,footer{
+  width: 100%;
+  box-sizing: border-box;
+}
+.content{
   display: flex;
   align-items: center;
-}
-header .logo{
-  padding:5px 10px;
-}
-header .logo a{
-  text-decoration: none;
-  color:#FFF;
-  font-size: 34px;
-}
-header .nav{
-  display: flex;
-  gap: 20px;
-  list-style: none;
-}
-header .nav li>a{
-  font-size: 18px;
-  color: #ff9800;
-  text-decoration: none;
+  justify-content: space-between;
+  flex-direction: column;
+  gap:10px;
 }
 
-header .nav li>a:hover{
-  filter:brightness(1.2);
-}
-main{
-  display: flex;
-  justify-content: space-between;
-  height: 100%;
-  min-height: calc(100vh - 145px);
-}
-main .wrapper{
-  width: 100%;
-  max-width: 290px;
-  margin:10px auto;
-  background-color: #fff;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  padding: 20px;
-  @include breakpointMin(tab) {
-    max-width: 748px;
-  }
-  @include breakpointMin(desktop) {
-    max-width: 1120px;
-  }
-}
-.lang-select{
-  display: flex;
-  list-style: none;
-  gap: 10px;
-}
-.lang{
-  padding: 5px 7px;
-  cursor: pointer;
-}
-.lang.active{
-  color: #696969;
-  font-weight: 600;
-  background-color:#ff9800;
-}
-footer{
-  box-sizing: border-box;
-  background-color: #333;
-  color: #fff;
-  text-align: center;
-  padding: 10px 20px;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  left:0;
-  height: 50px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+
+/* Grid*/
+$xs: 320px;
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1140px;
+
+@import "utils/_mixins.scss";
+@import "utils/_typography.scss";
+@import "components/_header.scss";
+@import "components/_main.scss";
+@import "components/_footer.scss";

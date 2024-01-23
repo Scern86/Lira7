@@ -1,0 +1,136 @@
+header{
+  padding: 10px;
+  background-color: rgb(var(--color-dark));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap:20px;
+  position: relative;
+  & .logo{
+    display: block;
+    color: rgb(var(--color-white));
+    font-size: 24px;
+    text-decoration: none;
+    font-weight: 100;
+    @include breakpointMin(md) {
+      font-size: 30px;
+    }
+    @include breakpointMin(xl) {
+      font-size: 34px;
+    }
+  }
+  & .menu{
+
+    & .nav{
+      list-style: none;
+      gap:20px;
+      /*display: flex;*/
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top:-16px;
+      right:0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(var(--color-dark),.95);
+      transition: right ease .3s;
+      display: none;
+      &.active{
+        display: flex;
+      }
+      @include breakpointMin(md) {
+        display: flex;
+        position: static;
+        top:auto;
+        right:auto;
+        width: auto;
+        height: auto;
+        background-color:inherit;
+        flex-direction: row;
+      }
+      &::before{
+        content: "+";
+        width: 0;
+        height: 0;
+        display: block;
+        position: absolute;
+        top: -30px;
+        right: 10px;
+        color: rgb(var(--color-white));
+        font-size: 85px;
+        transform: rotate(45deg);
+        @include breakpointMin(md) {
+          display: none;
+        }
+      }
+      & .item{
+        & .link{
+          text-decoration: none;
+          color: rgb(var(--color-orange));
+          font-size: 24px;
+          font-weight: 400;
+          @include breakpointMin(md) {
+            font-size: 18px;
+          }
+          @include breakpointMin(xl) {
+
+          }
+          &:hover{
+            filter: brightness(1.2);
+          }
+        }
+      }
+    }
+    & .mobile-menu-btn{
+      background: none;
+      border:0;
+      outline: none;
+      cursor:pointer;
+      width: 50px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      &::before{
+        content:'';
+        display: block;
+        width: 30px;
+        height: 5px;
+        border-top:3px solid rgb(var(--color-white));
+        border-bottom: 3px solid rgb(var(--color-white));
+      }
+      &::after{
+        content:'';
+        display: block;
+        width: 30px;
+        height: 5px;
+        border-bottom: 3px solid rgb(var(--color-white));
+      }
+      @include breakpointMin(md) {
+        display: none;
+      }
+    }
+  }
+
+  & .lang-select{
+    display: none;
+    list-style: none;
+    align-items: center;
+    gap:5px;
+    @include breakpointMin(xl) {
+      display: flex;
+    }
+    & .lang{
+      padding:3px 4px;
+      color: #FFF;
+      cursor: pointer;
+      &.active{
+        background-color: rgb(var(--color-orange));
+        color:rgb(var(--color-dark));
+      }
+    }
+  }
+
+}
