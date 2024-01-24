@@ -13,7 +13,7 @@ class Lexicon
         $this->currentLang = $this->defaultLang;
     }
 
-    public function get(string $key, string $defaultValue, ?string $langCode = null): string
+    public function get(string $key, string $defaultValue='', ?string $langCode = null): string
     {
         if (is_null($langCode)) $langCode = $this->currentLang->code;
         return $this->lexicon[$langCode][$key] ?? $defaultValue;

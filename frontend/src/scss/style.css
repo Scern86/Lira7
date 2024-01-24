@@ -185,7 +185,7 @@ header .lang-select .lang.active {
 }
 
 main {
-  min-height: 70vh;
+  min-height: 100vh;
 }
 @media (min-width: 768px) {
   main {

@@ -18,9 +18,14 @@ class Index extends Controller
     }
     public function execute(string $url): Result
     {
-        $this->view->meta_title = 'Home | Lira';
         $view = new View($this->lexicon);
-        $view->article = $this->model->getArticleById(4);
+        $view->article = $article = $this->model->getArticleById(4,$this->lexicon->currentLang);
+        $this->view->meta_title = $article['title'].' | Lira';
+        /*$this->lexicon->load(['en'=>[
+            'home'=>'Home',
+            'about'=>'About',
+            'catalog'=>'Catalog',
+        ]]);*/
         return new Success($view->render(ROOT_DIR . DS . 'component' . DS . 'Front' . DS . 'Index' . DS . 'template.inc'));
     }
 }

@@ -49,7 +49,7 @@ class Article extends Controller
         if($this->request->isMethod('POST')){
             $title = trim(htmlspecialchars($this->request->get('title')));
             $content = $this->request->get('content');
-            $article = $this->model->createArticle($title,$content);
+            $article = $this->model->createArticle($title,$content,['ru','en','gr','de','es']);
             if(!is_null($article)) return new Redirect($view->makeLink('/admin/article/edit/'.$article['id']));
             else return new Redirect($view->makeLink('/admin/article/add'));
         }
@@ -63,13 +63,13 @@ class Article extends Controller
             $view = new View($this->lexicon);
             if (preg_match('/\/edit\/(\d+)/', $url, $matches)) {
                 $id = $matches[1];
-                $view->article = $article = $this->model->getArticleById($id);
+                $view->article = $article = $this->model->getArticleById($id,$this->lexicon->currentLang);
                 if(empty($article)) throw new \Exception('Article not found');
                 if($this->request->isMethod('POST')){
                     $created = trim(htmlspecialchars($this->request->get('created')));
                     $title = trim(htmlspecialchars($this->request->get('title')));
                     $content = $this->request->get('content');
-                    $this->model->updateArticle($id,$created,$title,$content);
+                    $this->model->updateArticle($id,$created,$this->lexicon->currentLang,$title,$content);
                     return new Redirect($view->makeLink('/admin/article/edit/'.$id));
                 }
                 return new Success($view->render(self::TEMPLATES_DIR.DS.'edit.inc'));

@@ -18,9 +18,9 @@ class About extends Controller
     }
     public function execute(string $url): Result
     {
-        $this->view->meta_title = 'Home | Lira';
         $view = new View($this->lexicon);
-        $view->article = $this->model->getArticleById(3);
+        $view->article = $article = $this->model->getArticleById(3,$this->lexicon->currentLang);
+        $this->view->meta_title = $article['title'].' | Lira';
         return new Success($view->render(ROOT_DIR . DS . 'component' . DS . 'Front' . DS . 'About' . DS . 'template.inc'));
     }
 }

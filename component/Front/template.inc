@@ -21,9 +21,9 @@ $langs = ['ru','en','gr','de','es'];
             <a class="logo" href="/">SCERN</a>
             <div class="menu">
                 <ul class="nav">
-                    <li class="item"><a class="link" href="<?=$this->makeLink('/');?>">Home</a></li>
-                    <li class="item"><a class="link" href="<?=$this->makeLink('/about');?>">About</a></li>
-                    <li class="item"><a class="link" href="<?=$this->makeLink('/catalog');?>">Catalog</a></li>
+                    <li class="item"><a class="link" href="<?=$this->makeLink('/');?>"><?=$this->lexicon->get('home');?></a></li>
+                    <li class="item"><a class="link" href="<?=$this->makeLink('/about');?>"><?=$this->lexicon->get('about');?></a></li>
+                    <li class="item"><a class="link" href="<?=$this->makeLink('/catalog');?>"><?=$this->lexicon->get('catalog');?></a></li>
                     <li class="item"><a class="link" href="<?=$this->makeLink('/profile');?>">Profile</a></li>
                     <li class="item"><a class="link" href="<?=$this->makeLink('/test');?>">Test redirect</a></li>
                     <li class="item"><a class="link" href="<?=$this->makeLink('/error');?>">Error</a></li>
@@ -52,9 +52,9 @@ $langs = ['ru','en','gr','de','es'];
                 </div>
                 <div class="menu">
                     <ul class="nav">
-                        <li class="item"><a class="link" href="<?=$this->makeLink('/');?>">Home</a></li>
-                        <li class="item"><a class="link" href="<?=$this->makeLink('/about');?>">About</a></li>
-                        <li class="item"><a class="link" href="<?=$this->makeLink('/catalog');?>">Catalog</a></li>
+                        <li class="item"><a class="link" href="<?=$this->makeLink('/');?>"><?=$this->lexicon->get('home');?></a></li>
+                        <li class="item"><a class="link" href="<?=$this->makeLink('/about');?>"><?=$this->lexicon->get('about');?></a></li>
+                        <li class="item"><a class="link" href="<?=$this->makeLink('/catalog');?>"><?=$this->lexicon->get('catalog');?></a></li>
                         <li class="item"><a class="link" href="<?=$this->makeLink('/profile');?>">Profile</a></li>
                         <li class="item"><a class="link" href="<?=$this->makeLink('/test');?>">Test redirect</a></li>
                         <li class="item"><a class="link" href="<?=$this->makeLink('/error');?>">Error</a></li>

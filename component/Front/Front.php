@@ -34,6 +34,19 @@ class Front extends Controller
             $this->extensions
         );
 
+        $this->lexicon->load([
+            'en'=>[
+            'home'=>'Home',
+            'about'=>'About',
+            'catalog'=>'Catalog',
+                ],
+            'ru'=>[
+                'home'=>'Главная',
+                'about'=>'Обо мне',
+                'catalog'=>'Каталог',
+            ],
+        ]);
+
         $result = $controller->execute($url);
 
         switch ($result::class) {

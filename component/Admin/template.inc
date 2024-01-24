@@ -27,14 +27,14 @@
         }
     </style>
 </head>
-<body style="background-color: cornsilk;position:relative;min-height: 100vh;">
+<body style="background-color: cornsilk;position:relative;">
     <header>
         <br>
         <nav>
             <a href="<?=$this->makeLink('/admin/article');?>">Article</a>
         </nav>
     </header>
-    <main>
+    <main style="min-height: 100vh">
         <div style="overflow: hidden;">
             <h1>Admin panel</h1>
         </div>
@@ -42,7 +42,7 @@
             <?=$this->content;?>
         </div>
     </main>
-    <footer style="width:100%;position: absolute;bottom: 0;left:0;height: 50px;background-color: dimgrey;display: flex;justify-content: space-between;align-items: center">
+    <footer style="width:100%;height: 50px;background-color: dimgrey;display: flex;justify-content: space-between;align-items: center">
         <ul style="display: flex;gap: 10px;list-style: none">
             <li><a href="<?=$this->makeLink('/');?>">Home</a></li>
             <li><a href="<?=$this->makeLink('/about');?>">About</a></li>
