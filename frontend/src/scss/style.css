@@ -29,6 +29,7 @@ html, body, div.content, header, main, footer {
   justify-content: space-between;
   flex-direction: column;
   gap: 10px;
+  min-height: 100vh;
 }
 
 /* Grid*/
@@ -185,7 +186,7 @@ header .lang-select .lang.active {
 }
 
 main {
-  min-height: 100vh;
+  flex-grow: 1;
 }
 @media (min-width: 768px) {
   main {
@@ -203,6 +204,8 @@ main .wrapper {
   width: 100%;
   padding: 20px;
   font-weight: 300;
+  font-size: 20px;
+  line-height: 1.8;
 }
 @media (min-width: 768px) {
   main .wrapper {

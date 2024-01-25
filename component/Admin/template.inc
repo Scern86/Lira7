@@ -26,6 +26,8 @@
             background-color:rebeccapurple;
         }
     </style>
+    <?=implode('',$this->headersLinks);?>
+    <link rel="icon" href="/favicon.ico?v0">
 </head>
 <body style="background-color: cornsilk;position:relative;">
     <header>
@@ -63,7 +65,7 @@
             <?php } ?>
         </ul>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <?=implode('',$this->bodysLinks);?>
     <script>
         document.addEventListener('DOMContentLoaded',()=>{
             $('.lang:not(.active)').on('click',e=>{

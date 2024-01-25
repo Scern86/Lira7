@@ -1,5 +1,5 @@
 main{
-  min-height: 100vh;
+  flex-grow: 1;
   @include breakpointMin(md) {
     padding: 0 10px;
   }
@@ -12,6 +12,8 @@ main{
     width: 100%;
     padding:20px;
     font-weight: 300;
+    font-size: 20px;
+    line-height: 1.8;
     @include breakpointMin(md) {
       box-shadow: 0 0 5px rgba(var(--color-black),.2);
 

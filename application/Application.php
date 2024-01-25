@@ -28,6 +28,9 @@ class Application
 
     public function execute(string $requestUri): Result
     {
+        $this->view->addLinkToBodysEnd('<script defer src="https://code.jquery.com/jquery-3.7.1.min.js" 
+integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>');
+
         $controllerClass = $this->router->execute($requestUri);
 
         $controller = new $controllerClass(

@@ -13,7 +13,7 @@ $langs = ['ru','en','gr','de','es'];
     <meta name="description" content="<?=$this->meta_description;?>">
     <meta name="keywords" content="<?=$this->meta_keyword;?>">
     <link rel="icon" href="/favicon.ico?v0">
-    <link rel="stylesheet" href="/assets/css/style.min.css?<?=time();?>">
+    <?=implode('',$this->headersLinks);?>
 </head>
 <body>
     <div class="content">
@@ -83,7 +83,7 @@ $langs = ['ru','en','gr','de','es'];
             </div>
         </footer>
     </div>
-    <script defer src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <?=implode('\n',$this->bodysLinks);?>
     <script type="module">
         import {init} from '/assets/js/script.min.js?v0';
         init('<?=$this->lexicon->defaultLang->code;?>');

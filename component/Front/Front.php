@@ -17,6 +17,8 @@ class Front extends Controller
 
     public function execute(string $url): Result
     {
+        $this->view->addLinkToHeader('<link rel="stylesheet" href="/assets/css/style.min.css?'.time().'">');
+
         $router = new Router(
             \Scern\Lira\Component\DefaultController::class,
             $this->config->get('routes-front')

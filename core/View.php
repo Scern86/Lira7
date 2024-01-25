@@ -11,6 +11,9 @@ class View
 
     private array $values = [];
 
+    private array $headersLinks = [];
+    private array $bodysLinks = [];
+
     protected ?string $template = null;
 
     public function __construct(protected Lexicon $lexicon)
@@ -43,5 +46,20 @@ class View
             else $url = '/'.$lang.$url;
         }
         return $url;
+    }
+
+    public function addLinkToHeader(string $link,string $position='last'): void
+    {
+        if(!in_array($link,$this->headersLinks)) {
+            if($position=='first') array_unshift($this->headersLinks,$link);
+            else array_push($this->headersLinks,$link);
+        }
+    }
+    public function addLinkToBodysEnd(string $link,string $position='last'): void
+    {
+        if(!in_array($link,$this->bodysLinks)) {
+            if($position=='first') array_unshift($this->bodysLinks,$link);
+            else array_push($this->bodysLinks,$link);
+        }
     }
 }
