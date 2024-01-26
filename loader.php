@@ -37,7 +37,7 @@ try {
     $extensions->setDatabaseManager($dbManager);
 
     $defaultLanguage = $config->get('main')['default_language'] ?? null;
-    $lexicon = new Lexicon(new Lang($defaultLanguage));
+    $lexicon = new Lexicon(new Lang($defaultLanguage),['ru','en','gr','de','es']);
 
     $app = new Application(
         $stateManager,
@@ -47,7 +47,7 @@ try {
             \Scern\Lira\Component\DefaultController::class,
             (new PhpFile(ROOT_DIR . DS . 'config' . DS . 'routes.php'))->getArray()
         ),
-        new View($lexicon),
+        new View($lexicon, new \Scern\Lira\Seo($lexicon)),
         $lexicon,
         new User(new AccessManager([],true),$stateManager),
         $extensions

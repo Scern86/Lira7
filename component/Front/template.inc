@@ -9,9 +9,7 @@ $langs = ['ru','en','gr','de','es'];
     <meta name="viewport"
           content="width=device-width, shrink-to-fit=no, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title><?=$this->meta_title;?></title>
-    <meta name="description" content="<?=$this->meta_description;?>">
-    <meta name="keywords" content="<?=$this->meta_keyword;?>">
+    <?=$this->seo->render();?>
     <link rel="icon" href="/favicon.ico?v0">
     <?=implode('',$this->headersLinks);?>
 </head>
@@ -23,6 +21,9 @@ $langs = ['ru','en','gr','de','es'];
                 <ul class="nav">
                     <li class="item"><a class="link" href="<?=$this->makeLink('/');?>"><?=$this->lexicon->get('home');?></a></li>
                     <li class="item"><a class="link" href="<?=$this->makeLink('/about');?>"><?=$this->lexicon->get('about');?></a></li>
+                    <li class="item"><a class="link" href="<?=$this->makeLink('/blog');?>"><?=$this->lexicon->get('blog');?></a></li>
+                    <li class="item"><a class="link" href="<?=$this->makeLink('/projects');?>"><?=$this->lexicon->get('projects');?></a></li>
+                    <li class="item"><a class="link" href="<?=$this->makeLink('/contacts');?>"><?=$this->lexicon->get('contacts');?></a></li>
                     <li class="item"><a class="link" href="<?=$this->makeLink('/catalog');?>"><?=$this->lexicon->get('catalog');?></a></li>
                     <li class="item"><a class="link" href="<?=$this->makeLink('/profile');?>">Profile</a></li>
                     <li class="item"><a class="link" href="<?=$this->makeLink('/test');?>">Test redirect</a></li>
@@ -46,7 +47,7 @@ $langs = ['ru','en','gr','de','es'];
         <footer>
             <div class="wrapper">
                 <div class="contacts">
-                    <p><strong>Contacts</strong></p>
+                    <p><strong><?=$this->lexicon->get('contacts');?></strong></p>
                     <p>Phone: +30 (123) 234-56-78</p>
                     <p>Email: scern@scern.gr</p>
                 </div>
@@ -54,6 +55,8 @@ $langs = ['ru','en','gr','de','es'];
                     <ul class="nav">
                         <li class="item"><a class="link" href="<?=$this->makeLink('/');?>"><?=$this->lexicon->get('home');?></a></li>
                         <li class="item"><a class="link" href="<?=$this->makeLink('/about');?>"><?=$this->lexicon->get('about');?></a></li>
+                        <li class="item"><a class="link" href="<?=$this->makeLink('/blog');?>"><?=$this->lexicon->get('blog');?></a></li>
+                        <li class="item"><a class="link" href="<?=$this->makeLink('/projects');?>"><?=$this->lexicon->get('projects');?></a></li>
                         <li class="item"><a class="link" href="<?=$this->makeLink('/catalog');?>"><?=$this->lexicon->get('catalog');?></a></li>
                         <li class="item"><a class="link" href="<?=$this->makeLink('/profile');?>">Profile</a></li>
                         <li class="item"><a class="link" href="<?=$this->makeLink('/test');?>">Test redirect</a></li>
@@ -77,7 +80,7 @@ $langs = ['ru','en','gr','de','es'];
                         <?php } ?>
                     </ul>
                     <div class="copyright">
-                        © 2023 SCERN
+                        © 2024 SCERN
                     </div>
                 </div>
             </div>

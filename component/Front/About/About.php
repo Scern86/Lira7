@@ -20,7 +20,7 @@ class About extends Controller
     {
         $view = new View($this->lexicon);
         $view->article = $article = $this->model->getArticleById(3,$this->lexicon->currentLang);
-        $this->view->meta_title = $article['title'].' | Lira';
+        $this->view->seo->title = $article['title'].' | Lira';
         return new Success($view->render(ROOT_DIR . DS . 'component' . DS . 'Front' . DS . 'About' . DS . 'template.inc'));
     }
 }

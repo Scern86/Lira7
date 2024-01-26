@@ -16,7 +16,7 @@ class View
 
     protected ?string $template = null;
 
-    public function __construct(protected Lexicon $lexicon)
+    public function __construct(protected Lexicon $lexicon, public ?Seo $seo = null)
     {
         $this->appendOnly = false;
     }

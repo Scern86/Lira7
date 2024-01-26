@@ -212,6 +212,25 @@ main .wrapper {
     box-shadow: 0 0 5px rgba(var(--color-black), 0.2);
   }
 }
+main .wrapper .about-image {
+  background-image: url(/assets/images/about-img.jpg);
+  width: 100%;
+  height: 350px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+@media (min-width: 768px) {
+  main .wrapper .about-image {
+    width: 258px;
+    height: 258px;
+    border-radius: 2px;
+    float: right;
+    margin-left: 20px;
+    margin-top: 20px;
+  }
+}
+
 footer {
   background-color: rgb(var(--color-dark));
 }

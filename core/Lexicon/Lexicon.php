@@ -8,7 +8,7 @@ class Lexicon
 {
     public Lang $currentLang;
 
-    public function __construct(public readonly Lang $defaultLang, protected array $lexicon=[])
+    public function __construct(public readonly Lang $defaultLang, public readonly array $languagesList, protected array $lexicon=[])
     {
         $this->currentLang = $this->defaultLang;
     }
