@@ -13,12 +13,14 @@ class Front extends Controller
     {
         parent::__construct(...$args);
         $this->config->set('routes-front',new PhpFile(ROOT_DIR . DS . 'component' . DS . 'Front' . DS . 'routes.php'));
+        $this->view->addLinkToHeader('<link rel="stylesheet" href="/assets/css/style.min.css?'.time().'">');
+        $this->view->addLinkToBodysEnd('<script defer src="https://code.jquery.com/jquery-3.7.1.min.js" 
+integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>');
+        $this->view->addLinkToBodysEnd('<script type="module" src="/assets/js/script.min.js?'.time().'"></script>');
     }
 
     public function execute(string $url): Result
     {
-        $this->view->addLinkToHeader('<link rel="stylesheet" href="/assets/css/style.min.css?'.time().'">');
-
         $router = new Router(
             \Scern\Lira\Component\DefaultController::class,
             $this->config->get('routes-front')
@@ -62,6 +64,11 @@ class Front extends Controller
             'de'=>[
                 'home'=>'DE-Home',
                 'about'=>'DE-About',
+                'blog'=>'Blog',
+                'projects'=>'Projects',
+                'contacts'=>'Contacts',
+                'email'=>'E-mail',
+                'phone'=>'Phone',
                 'catalog'=>'DE-Catalog',
                 'coming_soon'=>'Coming soon',
             ],

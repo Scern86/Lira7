@@ -1,21 +1,21 @@
-const init = function (defaultLang){
-    $('body')
-        .on('click','.lang:not(.active)',e=>{
-        let currentLang = $('.lang.active').data('lang'),
-            selectedLang = $(e.target).data('lang');
-        changeLang(selectedLang,defaultLang,currentLang)
-    })
-    .on('click','.mobile-menu-btn',()=>{
-        $('header .nav').addClass('active');
-        $('body').css({'overflow':'hidden'});
-    })
-    .on('click','header .nav',e=>{
-        $('header .nav').removeClass('active');
-        $('body').css({'overflow':'visible'});
-    });
-};
+$('body')
+    .on('click','.lang:not(.active)',e=>{
+    let currentLang = $('.lang.active').data('lang'),
+        selectedLang = $(e.target).data('lang');
+    changeLang(selectedLang,currentLang)
+})
+.on('click','.mobile-menu-btn',()=>{
+    $('header .nav').addClass('active');
+    $('body').css({'overflow':'hidden'});
+})
+.on('click','header .nav',e=>{
+    $('header .nav').removeClass('active');
+    $('body').css({'overflow':'visible'});
+});
 
-const changeLang = function(selectedLang,defaultLang,currentLang){
+
+const changeLang = function(selectedLang,currentLang){
+    const defaultLang = document.body.getAttribute('data-default-lang');
     let loc = (window.location+'').replace(/\/+$/,'');
     if(currentLang===defaultLang){
         if(selectedLang !== defaultLang){
@@ -31,5 +31,3 @@ const changeLang = function(selectedLang,defaultLang,currentLang){
     }
     window.location = loc;
 }
-
-export {init,changeLang}

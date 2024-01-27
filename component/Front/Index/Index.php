@@ -28,6 +28,7 @@ class Index extends Controller
         ]]);*/
 
         $this->view->seo->title = $article['title'].' | Lira';
+        $this->view->seo->description = 'Lira, home page description';
         return new Success($view->render(ROOT_DIR . DS . 'component' . DS . 'Front' . DS . 'Index' . DS . 'template.inc'));
     }
 }
