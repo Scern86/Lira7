@@ -2,16 +2,16 @@
 
 require_once 'vendor' . DS . 'autoload.php';
 
+use Scern\Lira\{Router, User, View};
+use Scern\Lira\Access\AccessManager;
 use Scern\Lira\Application\{Application, Extensions};
 use Scern\Lira\Application\Result\{Error, Json, Redirect, Success};
 use Scern\Lira\Config\{Config, PhpFile};
 use Scern\Lira\Extensions\{LoggerManager};
+use Scern\Lira\Extensions\Database\DatabaseManager;
 use Scern\Lira\Lexicon\{Lang, Lexicon};
-use Scern\Lira\{Router, View, User};
-use Scern\Lira\Access\AccessManager;
-use \Scern\Lira\State\SessionState;
-use \Scern\Lira\Extensions\Database\DatabaseManager;
-use Symfony\Component\HttpFoundation\{Request, JsonResponse, RedirectResponse, Response};
+use Scern\Lira\State\SessionState;
+use Symfony\Component\HttpFoundation\{JsonResponse, RedirectResponse, Request, Response};
 
 try {
     $request = Request::createFromGlobals();
@@ -37,7 +37,7 @@ try {
     $extensions->setDatabaseManager($dbManager);
 
     $defaultLanguage = $config->get('main')['default_language'] ?? null;
-    $lexicon = new Lexicon(new Lang($defaultLanguage),['ru','en','gr','de','es']);
+    $lexicon = new Lexicon(new Lang($defaultLanguage),$config->get('main')['languages_list']);
 
     $app = new Application(
         $stateManager,
@@ -47,7 +47,7 @@ try {
             \Scern\Lira\Component\DefaultController::class,
             (new PhpFile(ROOT_DIR . DS . 'config' . DS . 'routes.php'))->getArray()
         ),
-        new View($lexicon, new \Scern\Lira\Seo($lexicon)),
+        new View($lexicon, new \Scern\Lira\Application\Seo\Seo($lexicon,new \Scern\Lira\Application\Seo\Robots())),
         $lexicon,
         new User(new AccessManager([],true),$stateManager),
         $extensions

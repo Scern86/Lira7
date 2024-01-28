@@ -4,6 +4,7 @@ namespace Scern\Lira\Component\Front\About;
 
 use Scern\Lira\Application\Controller;
 use Scern\Lira\Application\Result\{Result, Success};
+use Scern\Lira\Application\Seo\{RobotsFollow,RobotsIndex};
 use Scern\Lira\Component\Front\Models\Article;
 use Scern\Lira\Extensions\Database\Adapters\Postgresql;
 use Scern\Lira\View;
@@ -21,6 +22,9 @@ class About extends Controller
         $view = new View($this->lexicon);
         $view->article = $article = $this->model->getArticleById(3,$this->lexicon->currentLang);
         $this->view->seo->title = $article['title'].' | Lira';
+        $this->view->seo->canonical = '/about';
+        $this->view->seo->robots->index = RobotsIndex::index;
+        $this->view->seo->robots->follow = RobotsFollow::nofollow;
         return new Success($view->render(ROOT_DIR . DS . 'component' . DS . 'Front' . DS . 'About' . DS . 'template.inc'));
     }
 }

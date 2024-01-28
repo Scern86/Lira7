@@ -102,7 +102,7 @@ integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="ano
             case Success::class:
             case Error::class:
                 $this->view->content = $result->content;
-                return new Success($this->view->render(ROOT_DIR . DS . 'component' . DS . 'Front' . DS . 'template.inc'));
+                return new Success($this->view->render(ROOT_DIR . DS . 'component' . DS . 'Front' . DS . 'templates' . DS . 'template.inc'));
             case Json::class:
             case Redirect::class:
             case InternalRedirect::class:

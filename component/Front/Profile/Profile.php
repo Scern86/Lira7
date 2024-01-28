@@ -35,7 +35,7 @@ class Profile extends Controller
 
     public function execute(string $url): Result
     {
-        $this->view->setTemplate(ROOT_DIR . DS . 'component' . DS . 'Front' . DS . 'template.inc');
+        /*$this->view->setTemplate(ROOT_DIR . DS . 'component' . DS . 'Front' . DS . 'templates' . DS . 'template.inc');*/
         $url = str_replace('/profile', '', $url);
         switch ($url) {
             case '/login':

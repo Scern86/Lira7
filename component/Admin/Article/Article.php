@@ -47,7 +47,7 @@ class Article extends Controller
         if($this->request->isMethod('POST')){
             $title = trim(htmlspecialchars($this->request->get('title')));
             $content = $this->request->get('content');
-            $article = $this->model->createArticle($title,$content,['ru','en','gr','de','es']);
+            $article = $this->model->createArticle($title,$content,$this->config->get('main')['languages_list']);
             if(!is_null($article)) return new Redirect($this->view->makeLink('/admin/article/edit/'.$article['id']));
             else return new Redirect($this->view->makeLink('/admin/article/add'));
         }
