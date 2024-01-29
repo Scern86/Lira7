@@ -4,9 +4,10 @@ namespace Scern\Lira\Component\Front\About;
 
 use Scern\Lira\Application\Controller;
 use Scern\Lira\Application\Result\{Result, Success};
-use Scern\Lira\Application\Seo\{RobotsFollow,RobotsIndex};
 use Scern\Lira\Component\Front\Models\Article;
 use Scern\Lira\Extensions\Database\Adapters\Postgresql;
+use Scern\Lira\Seo\{RobotsIndex};
+use Scern\Lira\Seo\RobotsFollow;
 use Scern\Lira\View;
 
 class About extends Controller

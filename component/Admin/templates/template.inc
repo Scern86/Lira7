@@ -20,27 +20,8 @@ $langList = (new \Scern\Lira\View($this->lexicon))
         <a class="logo" href="/">SCERN</a>
         <div class="menu">
             <ul class="nav">
-                <li class="item"><a class="link"
-                                    href="<?= $this->makeLink('/'); ?>"><?= $this->lexicon->get('home'); ?></a></li>
-                <li class="item"><a class="link"
-                                    href="<?= $this->makeLink('/about'); ?>"><?= $this->lexicon->get('about'); ?></a>
-                </li>
-                <li class="item"><a class="link"
-                                    href="<?= $this->makeLink('/blog'); ?>"><?= $this->lexicon->get('blog'); ?></a></li>
-                <li class="item"><a class="link"
-                                    href="<?= $this->makeLink('/projects'); ?>"><?= $this->lexicon->get('projects'); ?></a>
-                </li>
-                <li class="item"><a class="link"
-                                    href="<?= $this->makeLink('/contacts'); ?>"><?= $this->lexicon->get('contacts'); ?></a>
-                </li>
-                <li class="item"><a class="link"
-                                    href="<?= $this->makeLink('/catalog'); ?>"><?= $this->lexicon->get('catalog'); ?></a>
-                </li>
-                <li class="item"><a class="link" href="<?= $this->makeLink('/profile'); ?>">Profile</a></li>
-                <li class="item"><a class="link" href="<?= $this->makeLink('/test'); ?>">Test redirect</a></li>
-                <li class="item"><a class="link" href="<?= $this->makeLink('/error'); ?>">Error</a></li>
-                <li class="item"><a class="link" href="<?= $this->makeLink('/admin'); ?>">Admin panel</a></li>
-                <li class="item"><a class="link" href="/api">API</a></li>
+                <li class="item"><a class="link" href="<?=$this->makeLink('/admin/article');?>">Article</a></li>
+                <li class="item"><a class="link" href="<?=$this->makeLink('/admin/category');?>">Category</a></li>
             </ul>
             <div role="button" class="mobile-menu-btn"></div>
         </div>
@@ -49,9 +30,7 @@ $langList = (new \Scern\Lira\View($this->lexicon))
         </ul>
     </header>
     <main>
-        <div class="wrapper">
-            <?= $this->content; ?>
-        </div>
+        <?= $this->content; ?>
     </main>
     <footer>
         <div class="wrapper">

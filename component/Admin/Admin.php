@@ -29,7 +29,12 @@ class Admin extends Controller
         );
         $this->user = new \Scern\Lira\Component\Admin\User(new AccessManager(),$stateManager,$dbManager,$this->request->getClientIp());
         parent::__construct($stateManager,$config, $request, $view, $lexicon, $this->user, $extensions);
-        $this->view->setTemplate(ROOT_DIR . DS . 'component' . DS . 'Admin' . DS . 'template.inc');
+        /*$this->view->setTemplate(ROOT_DIR . DS . 'component' . DS . 'Admin' . DS . 'template.inc');*/
+        $this->view->seo->base = $this->config->get('main')['domain'];
+        $this->view->addLinkToHeader('<link rel="stylesheet" href="/assets/css/style.min.css?'.time().'">');
+        $this->view->addLinkToBodysEnd('<script defer src="https://code.jquery.com/jquery-3.7.1.min.js" 
+integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>');
+        $this->view->addLinkToBodysEnd('<script type="module" src="/assets/js/script.min.js?'.time().'"></script>');
     }
 
     public function execute(string $url): Result
@@ -54,13 +59,71 @@ class Admin extends Controller
             $this->extensions
         );
 
+        $this->lexicon->load([
+            'en'=>[
+                'home'=>'Home',
+                'about'=>'About',
+                'blog'=>'Blog',
+                'projects'=>'Projects',
+                'contacts'=>'Contacts',
+                'email'=>'E-mail',
+                'phone'=>'Phone',
+                'catalog'=>'Catalog',
+                'coming_soon'=>'Coming soon',
+            ],
+            'ru'=>[
+                'home'=>'Главная',
+                'about'=>'Обо мне',
+                'blog'=>'Блог',
+                'projects'=>'Проекты',
+                'contacts'=>'Контакты',
+                'email'=>'E-mail',
+                'phone'=>'Телефон',
+                'catalog'=>'Каталог',
+                'coming_soon'=>'Coming soon',
+            ],
+            'de'=>[
+                'home'=>'DE-Home',
+                'about'=>'DE-About',
+                'blog'=>'Blog',
+                'projects'=>'Projects',
+                'contacts'=>'Contacts',
+                'email'=>'E-mail',
+                'phone'=>'Phone',
+                'catalog'=>'DE-Catalog',
+                'coming_soon'=>'Coming soon',
+            ],
+            'es'=>[
+                'home'=>'ES-Home',
+                'about'=>'ES-About',
+                'blog'=>'Blog',
+                'projects'=>'Projects',
+                'contacts'=>'Contacts',
+                'email'=>'E-mail',
+                'phone'=>'Phone',
+                'catalog'=>'ES-Catalog',
+                'coming_soon'=>'Coming soon',
+            ],
+            'gr'=>[
+                'home'=>'GR-Home',
+                'about'=>'GR-About',
+                'blog'=>'Blog',
+                'projects'=>'Projects',
+                'contacts'=>'Contacts',
+                'email'=>'E-mail',
+                'phone'=>'Phone',
+                'catalog'=>'GR-Catalog',
+                'coming_soon'=>'Coming soon',
+            ],
+        ]);
+
         $result = $controller->execute($url);
 
         switch ($result::class) {
             case Success::class:
             case Error::class:
                 $this->view->content = $result->content;
-                return new Success($this->view->render());
+                return new Success($this->view->render(ROOT_DIR . DS . 'component' . DS . 'Admin' . DS . 'templates' . DS . 'template.inc'));
             case Json::class:
             case Redirect::class:
             case InternalRedirect::class:

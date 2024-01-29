@@ -47,7 +47,7 @@ try {
             \Scern\Lira\Component\DefaultController::class,
             (new PhpFile(ROOT_DIR . DS . 'config' . DS . 'routes.php'))->getArray()
         ),
-        new View($lexicon, new \Scern\Lira\Application\Seo\Seo($lexicon,new \Scern\Lira\Application\Seo\Robots())),
+        new View($lexicon, new \Scern\Lira\Seo\Seo($lexicon,new \Scern\Lira\Seo\Robots())),
         $lexicon,
         new User(new AccessManager([],true),$stateManager),
         $extensions

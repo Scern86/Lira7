@@ -20,13 +20,6 @@ class Index extends Controller
     {
         $view = new View($this->lexicon);
         $view->article = $article = $this->model->getArticleById(4,$this->lexicon->currentLang);
-        //$this->view->meta_title =
-        /*$this->lexicon->load(['en'=>[
-            'home'=>'Home',
-            'about'=>'About',
-            'catalog'=>'Catalog',
-        ]]);*/
-
         $this->view->seo->title = $article['title'].' | Lira';
         $this->view->seo->description = 'Lira, home page description';
         return new Success($view->render(ROOT_DIR . DS . 'component' . DS . 'Front' . DS . 'Index' . DS . 'template.inc'));

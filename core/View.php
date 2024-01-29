@@ -2,8 +2,8 @@
 
 namespace Scern\Lira;
 
-use Scern\Lira\Application\Seo\Seo;
 use Scern\Lira\Lexicon\Lexicon;
+use Scern\Lira\Seo\Seo;
 use Scern\Lira\Traits\{Getter, Setter};
 
 class View

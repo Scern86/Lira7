@@ -6,9 +6,9 @@
     <thead>
         <tr>
             <th width="40">ID</th>
-            <th width="80">Created</th>
+            <th width="100">Created</th>
             <th>Title</th>
-            <th width="80"></th>
+            <th width="40"></th>
         </tr>
     </thead>
     <tbody>

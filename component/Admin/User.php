@@ -25,6 +25,9 @@ class User extends \Scern\Lira\User
             'Scern\Lira\Component\Admin\Article\Article::_add'=>true,
             'Scern\Lira\Component\Admin\Article\Article::_edit'=>true,
             'Scern\Lira\Component\Admin\Article\Article::_list'=>true,
+            'Scern\Lira\Component\Admin\Category\Category::_add'=>true,
+            'Scern\Lira\Component\Admin\Category\Category::_edit'=>true,
+            'Scern\Lira\Component\Admin\Category\Category::_list'=>true,
         ];
         parent::__construct($accessManager,$stateManager,$isGuest);
         $this->accessManager->addRules($rules);

@@ -13,6 +13,7 @@ class Front extends Controller
     {
         parent::__construct(...$args);
         $this->config->set('routes-front',new PhpFile(ROOT_DIR . DS . 'component' . DS . 'Front' . DS . 'routes.php'));
+        $this->view->seo->base = $this->config->get('main')['domain'];
         $this->view->addLinkToHeader('<link rel="stylesheet" href="/assets/css/style.min.css?'.time().'">');
         $this->view->addLinkToBodysEnd('<script defer src="https://code.jquery.com/jquery-3.7.1.min.js" 
 integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>');
