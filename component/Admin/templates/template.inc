@@ -22,6 +22,7 @@ $langList = (new \Scern\Lira\View($this->lexicon))
             <ul class="nav">
                 <li class="item"><a class="link" href="<?=$this->makeLink('/admin/article');?>">Article</a></li>
                 <li class="item"><a class="link" href="<?=$this->makeLink('/admin/category');?>">Category</a></li>
+                <li class="item"><a class="link" href="<?=$this->makeLink('/admin/page');?>">Page</a></li>
             </ul>
             <div role="button" class="mobile-menu-btn"></div>
         </div>

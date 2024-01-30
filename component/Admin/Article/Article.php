@@ -53,7 +53,7 @@ class Article extends Controller
         }
         $this->view->addLinkToBodysEnd('<script defer src="https://cdn.ckeditor.com/ckeditor5/40.2.0/super-build/ckeditor.js"></script>');
         $this->view->addLinkToBodysEnd('<script defer src="/ck-config.js"></script>');
-        $this->view->meta_title = 'Add Article | Lira';
+        $this->view->seo->title = 'Add Article | Lira';
         $view = new View($this->lexicon);
         return new Success($view->render(self::TEMPLATES_DIR.DS.'add.inc'));
     }
@@ -70,7 +70,7 @@ class Article extends Controller
                     $this->model->updateArticle($id,$created,$this->lexicon->currentLang,$title,$content);
                     return new Redirect($this->view->makeLink('/admin/article/edit/'.$id));
                 }
-                $this->view->meta_title = 'Edit Article | Lira';
+                $this->view->seo->title = 'Edit Article | Lira';
                 $view = new View($this->lexicon);
                 $view->article = $article = $this->model->getArticleById($id,$this->lexicon->currentLang);
                 $this->view->addLinkToBodysEnd('<script defer src="https://cdn.ckeditor.com/ckeditor5/40.2.0/super-build/ckeditor.js"></script>');
@@ -87,9 +87,9 @@ class Article extends Controller
     protected function _list(): Result
     {
         if(!$this->user->isMethodAllowed(__METHOD__)) return new Error('Access denied');
-        $this->view->meta_title = 'List Article | Lira';
+        $this->view->seo->title = 'List Article | Lira';
         $view = new View($this->lexicon);
-        $view->listArticles = $this->model->getArticlesList();
+        $view->listArticles = $this->model->getArticlesList($this->lexicon->currentLang);
         return new Success($view->render(self::TEMPLATES_DIR.DS.'list.inc'));
     }
 }

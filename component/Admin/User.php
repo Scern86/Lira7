@@ -4,6 +4,8 @@ namespace Scern\Lira\Component\Admin;
 
 use Scern\Lira\Access\AccessManager;
 use Scern\Lira\Application\Models\Login;
+use Scern\Lira\Component\Admin\Models\Action;
+use Scern\Lira\Component\Admin\Models\Role;
 use Scern\Lira\Extensions\Database\DatabaseManager;
 use Scern\Lira\State\StateStrategy;
 
@@ -20,15 +22,23 @@ class User extends \Scern\Lira\User
             else $isGuest = true;
         }
         else $isGuest = true;
-        // TODO Load list rules from DB
-        $rules = [
-            'Scern\Lira\Component\Admin\Article\Article::_add'=>true,
-            'Scern\Lira\Component\Admin\Article\Article::_edit'=>true,
-            'Scern\Lira\Component\Admin\Article\Article::_list'=>true,
-            'Scern\Lira\Component\Admin\Category\Category::_add'=>true,
-            'Scern\Lira\Component\Admin\Category\Category::_edit'=>true,
-            'Scern\Lira\Component\Admin\Category\Category::_list'=>true,
-        ];
+
+        // Load list rules from DB
+        $roleMdl = new Role($this->databaseManager->get('database'));
+        $roles = $roleMdl->getRolesByUserId(1);
+        $rules = [];
+        if(!empty($roles)){
+            $actionsMdl = new Action($this->databaseManager->get('database'));
+            foreach ($roles as $role){
+                $actions = $actionsMdl->getActionsByRoleId($role['id']);
+                if(!empty($actions)){
+                    foreach ($actions as $action){
+                        $rules[$action['action']] = $action['is_allowed'];
+                    }
+                }
+            }
+        }
+
         parent::__construct($accessManager,$stateManager,$isGuest);
         $this->accessManager->addRules($rules);
     }

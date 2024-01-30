@@ -13,11 +13,11 @@ class Model extends \Scern\Lira\Model
     {
     }
 
-    public function getCategoriesList(): array
+    public function getCategoriesList(Lang $lang): array
     {
         try{
-            $query = $this->database->prepare("SELECT * FROM {$this->table} AS c,{$this->table_content} AS cc WHERE c.id=cc.id_category AND cc.language = :language ORDER BY created DESC");
-            $query->execute(['ru']);
+            $query = $this->database->prepare("SELECT * FROM {$this->table} AS c,{$this->table_content} AS cc WHERE c.id=cc.id_category AND cc.language = :language ORDER BY c.id DESC");
+            $query->execute(['language'=>$lang->code]);
             return $query->fetchAll(\PDO::FETCH_ASSOC);
         }catch (\Exception $e){
             //var_dump($e);
