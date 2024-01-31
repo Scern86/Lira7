@@ -2,18 +2,11 @@
 
 namespace Scern\Lira\Component\Admin\Page;
 
-use Scern\Lira\Access\AccessManager;
 use Scern\Lira\Application\Controller;
 use Scern\Lira\Application\Result\{Error, Redirect, Result, Success};
-use Scern\Lira\Application\Extensions;
-use Scern\Lira\Application\Models\Role;
-use Scern\Lira\Config\Config;
-use Scern\Lira\Extensions\Database\Adapters\Postgresql;
-use Scern\Lira\Lexicon\Lexicon;
-use Scern\Lira\State\StateStrategy;
-use Scern\Lira\User;
 use Scern\Lira\View;
-use Symfony\Component\HttpFoundation\Request;
+
+//use Scern\Lira\Application\Objects\Page;
 
 class Page extends Controller
 {
@@ -47,8 +40,11 @@ class Page extends Controller
         if ($this->request->isMethod('POST')) {
             $uri = trim(htmlspecialchars($this->request->get('uri')));
             $h1 = trim(htmlspecialchars($this->request->get('h1')));
-            $page = $this->model->createPage($uri,$h1, $this->config->get('main')['languages_list']);
-            if (!is_null($page)) return new Redirect($this->view->makeLink('/admin/page/edit/' . $page['id']));
+            $page = new \Scern\Lira\Application\Objects\Page();
+            $page->uri = $uri;
+            $page->h1 = $h1;
+            $pageId = $this->model->createPage($page, $this->config->get('main')['languages_list']);
+            if (!is_null($pageId)) return new Redirect($this->view->makeLink('/admin/page/edit/' . $pageId));
             else return new Redirect($this->view->makeLink('/admin/page/add'));
         }
         $this->view->seo->title = 'Add page | SCERN';
@@ -62,16 +58,21 @@ class Page extends Controller
         try {
             if (preg_match('/\/edit\/(\d+)/', $url, $matches)) {
                 $id = $matches[1];
+                $pageModel = new \Scern\Lira\Application\Models\Page($this->extensions->getDatabaseManager()->get('database'));
+                $page = $pageModel->getById($id, $this->lexicon->currentLang);
                 if ($this->request->isMethod('POST')) {
-                    $created = trim(htmlspecialchars($this->request->get('created')));
-                    $uri = trim(htmlspecialchars($this->request->get('uri')));
-                    $h1 = trim(htmlspecialchars($this->request->get('h1')));
-                    $this->model->updatePage($id, $created, $uri,$this->lexicon->currentLang, $h1);
+                    $page->uri = trim(htmlspecialchars($this->request->get('uri')));
+                    $page->h1 = trim(htmlspecialchars($this->request->get('h1')));
+                    $page->meta_title = trim(htmlspecialchars($this->request->get('meta_title')));
+                    $page->meta_description = trim(htmlspecialchars($this->request->get('meta_description')));
+                    $page->robots_index = $this->request->get('robots_index')==='true';
+                    $page->robots_follow = $this->request->get('robots_follow')==='true';
+                    $this->model->updatePage($page,$this->lexicon->currentLang);
                     return new Redirect($this->view->makeLink('/admin/page/edit/' . $id));
                 }
                 $this->view->seo->title = 'Edit page | SCERN';
                 $view = new View($this->lexicon);
-                $view->page = $page = $this->model->getPageById($id, $this->lexicon->currentLang);
+                $view->page = $page;
                 if (empty($page)) throw new \Exception('Page not found');
                 return new Success($view->render(self::TEMPLATES_DIR . DS . 'edit.inc'));
             } else throw new \Exception('ID undefined');

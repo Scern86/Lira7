@@ -14,6 +14,7 @@ class Dashboard extends Controller
     public function execute(string $url): Result
     {
         if($this->user->isGuest) return new Redirect($this->view->makeLink('/admin/login'));
+        $this->view->seo->title = 'Dashboard | SCERN';
         return new Success();
     }
 }
