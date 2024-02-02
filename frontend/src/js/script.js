@@ -19,14 +19,14 @@ const changeLang = function(selectedLang,currentLang){
     let loc = (window.location+'').replace(/\/+$/,'');
     if(currentLang===defaultLang){
         if(selectedLang !== defaultLang){
-            loc = loc.replace(/.local/,'.local/'+selectedLang);
+            loc = loc.replace(/.com/,'.com/'+selectedLang);
         }
     }else{
         if(selectedLang===defaultLang){
-            loc = loc.replace(/.local\/[a-z]{2}/,'.local');
+            loc = loc.replace(/.com\/[a-z]{2}/,'.com');
         }
         else{
-            loc = loc.replace(/.local\/[a-z]{2}/,'.local/'+selectedLang);
+            loc = loc.replace(/.com\/[a-z]{2}/,'.com/'+selectedLang);
         }
     }
     window.location = loc;

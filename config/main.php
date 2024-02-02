@@ -2,6 +2,6 @@
 
 return [
     'domain'=>'https://example.com',
-    'default_language'=>'de',
-    'languages_list'=>['ru','en','gr','de','es'],
+    'defaultLanguage'=>'en',
+    'languagesList'=>['ru','en','gr','de','es'],
 ];

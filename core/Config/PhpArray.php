@@ -2,14 +2,10 @@
 
 namespace Scern\Lira\Config;
 
-class PhpArray implements Source
+class PhpArray extends Source
 {
-    public function __construct(protected array $config)
+    public function __construct(array $values)
     {
-    }
-
-    public function getArray(): array
-    {
-        return $this->config;
+        parent::__construct($values);
     }
 }

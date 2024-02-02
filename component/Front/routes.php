@@ -2,11 +2,9 @@
 
 return [
     '#^/$#' => \Scern\Lira\Component\Front\Index\Index::class,
-    '#^/catalog($|/)#' => \Scern\Lira\Component\Front\Catalog::class,
-    '#^/about($|/)#' => \Scern\Lira\Component\Front\About\About::class,
-    '#^/test($|/)#' => \Scern\Lira\Component\Front\Test::class,
-    '#^/profile($|/)#' => \Scern\Lira\Component\Front\Profile\Profile::class,
-    '#^/blog($|/)#' => \Scern\Lira\Component\Front\Blog\Blog::class,
-    '#^/projects($|/)#' => \Scern\Lira\Component\Front\Projects\Projects::class,
-    '#^/contacts($|/)#' => \Scern\Lira\Component\Front\Contacts\Contacts::class,
+    '#^/error($|/)#' => \Scern\Lira\Component\Front\Error\Error::class,
+    '#^/redirect($|/)#' => \Scern\Lira\Component\Front\Redirect\Redirect::class,
+    '#^/internal($|/)#' => \Scern\Lira\Component\Front\InternalRedirect\InternalRedirect::class,
+    '#^/json($|/)#' => \Scern\Lira\Component\Front\Json\Json::class,
+    '#^/page/redirected/here($|/)#' => \Scern\Lira\Component\Front\TestRedirect\TestRedirect::class,
 ];

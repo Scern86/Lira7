@@ -2,21 +2,17 @@
 
 namespace Scern\Lira\Config;
 
-class PhpFile implements Source
+class PhpFile extends Source
 {
-    protected array $array = [];
     public function __construct(protected string $config_file)
     {
         if(!file_exists($this->config_file)) throw new \Exception("File {$config_file} not exists!");
         try{
-            $this->array = include_once $this->config_file;
+            $values = include $this->config_file;
         }catch (\Throwable $e){
             // Log
+            $values = [];
         }
-    }
-
-    public function getArray(): array
-    {
-        return $this->array;
+        parent::__construct($values);
     }
 }

@@ -3,7 +3,6 @@
 namespace Scern\Lira;
 
 use Scern\Lira\Lexicon\Lexicon;
-use Scern\Lira\Seo\Seo;
 use Scern\Lira\Traits\{Getter, Setter};
 
 class View
@@ -12,29 +11,30 @@ class View
 
     private array $values = [];
 
-    private array $headersLinks = [];
-    private array $bodysLinks = [];
-
     protected ?string $template = null;
 
-    public function __construct(protected Lexicon $lexicon, public ?Seo $seo = null)
+    protected array $headersLinks = [];
+
+    protected array $bodysLinks = [];
+
+    public function __construct(protected Lexicon $lexicon,bool $appendOnly=false)
     {
-        $this->appendOnly = false;
+        $this->appendOnly = $appendOnly;
     }
 
-    public function setTemplate(string $template): void
+    public function setTemplate(string $templatePath): void
     {
-        if(!file_exists($template)) throw new \Exception('File not exists');
-        $this->template = $template;
+        if(!file_exists($templatePath)) throw new \Exception('File not exists');
+        $this->template = $templatePath;
     }
 
-    public function render(?string $template=null): string
+    public function render(?string $templatePath=null): string
     {
-        if(is_null($template) && !is_null($this->template)) $template = $this->template;
-        if(is_null($template))  throw new \Exception('Template not set');
-        if(!file_exists($template)) throw new \Exception('File not exists');
+        if(is_null($templatePath)) $templatePath = $this->template;
+        if(is_null($templatePath))  throw new \Exception('Template not set');
+        if(!file_exists($templatePath)) throw new \Exception('File not exists');
         ob_start();
-        include $template;
+        include $templatePath;
         $result = ob_get_clean();
         return $result;
     }

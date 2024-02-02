@@ -2,7 +2,13 @@
 
 namespace Scern\Lira;
 
-abstract class Model
-{
+use Scern\Lira\Database\Database;
 
+readonly class Model
+{
+    protected object $db;
+    public function __construct(Database $database)
+    {
+        $this->db = $database->getDatabaseObject();
+    }
 }

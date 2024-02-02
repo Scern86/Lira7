@@ -2,7 +2,13 @@
 
 namespace Scern\Lira\Config;
 
-interface Source
+use Scern\Lira\Traits\Getter;
+
+class Source
 {
-    public function getArray(): array;
+    use Getter;
+
+    public function __construct(public readonly array $values)
+    {
+    }
 }

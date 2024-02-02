@@ -2,50 +2,62 @@
 
 namespace Scern\Lira\Application;
 
-use Scern\Lira\Application\Result\{Error, InternalRedirect, Json, Redirect, Result, Success};
-use Scern\Lira\Config\Config;
 use Scern\Lira\Lexicon\Lexicon;
+use Scern\Lira\Application\Results\{Success, Error, Json, Redirect, InternalRedirect};
+use Scern\Lira\Config\Manager;
+use Scern\Lira\Results\Result;
 use Scern\Lira\Router;
-use Scern\Lira\{State\StateStrategy, View, User};
-use Symfony\Component\HttpFoundation\Request;
+use Scern\Lira\Session;
+use Scern\Lira\View;
+use \Scern\Lira\Access\UserContract;
+use Symfony\Component\HttpFoundation\{Request,Response};
 
-class Application
+class Application extends \Scern\Lira\Application\Controller
 {
     const VERSION = '7.3.0';
 
     public function __construct(
-        protected StateStrategy $stateManager,
-        protected Config        $config,
-        protected Request       $request,
-        protected Router        $router,
-        protected View          $view,
-        protected Lexicon       $lexicon,
-        protected User          $user,
-        protected Extensions    $extensions
+        Request                         $request,
+        Session                         $session,
+        Manager                         $config,
+        protected Router                $router,
+        View                            $view,
+        UserContract $user,
+        Lexicon                         $lexicon,
+        \Scern\Lira\Database\Manager    $database,
+        \Scern\Lira\Cache\Manager       $cache,
+        \Scern\Lira\Logger\Manager      $logger
     )
     {
+        parent::__construct($request, $session, $config, $view, $user, $lexicon, $database, $cache, $logger);
     }
 
-    public function execute(string $requestUri): Result
+    public function execute(string $uri): Result
     {
-        $controllerClass = $this->router->execute($requestUri);
+        try {
+            $componentClass = $this->router->execute($uri);
 
-        $controller = new $controllerClass(
-            $this->stateManager,
-            $this->config,
-            $this->request,
-            $this->view,
-            $this->lexicon,
-            $this->user,
-            $this->extensions
-        );
+            $component = new $componentClass(
+                $this->request,
+                $this->session,
+                $this->config,
+                $this->view,
+                $this->user,
+                $this->lexicon,
+                $this->database,
+                $this->cache,
+                $this->logger
+            );
 
-        $result = $controller->execute($requestUri);
+            $result = $component->execute($uri);
 
-        return match ($result::class) {
-            Success::class, Error::class, Json::class, Redirect::class => $result,
-            InternalRedirect::class => $this->execute($result->url),
-            default => new Error('Application error')
-        };
+            return match ($result::class) {
+                Success::class, Error::class, Json::class, Redirect::class => $result,
+                InternalRedirect::class => $this->execute($result->url),
+                default => new \Exception('Application error')
+            };
+        } catch (\Exception $e) {
+            return new Error($e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 }

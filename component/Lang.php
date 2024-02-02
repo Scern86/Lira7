@@ -2,21 +2,22 @@
 
 namespace Scern\Lira\Component;
 
+use Scern\Lira\Results\Result;
+use Scern\Lira\Application\Results\{InternalRedirect, Redirect, Success};
 use Scern\Lira\Application\Controller;
-use Scern\Lira\Application\Result\{InternalRedirect, Redirect, Result};
 
 class Lang extends Controller
 {
-    public function execute(string $url): Result
+    public function execute(string $uri): Result
     {
-        $urlArray = array_filter(explode('/',$url));
+        $urlArray = array_filter(explode('/',$uri));
         $lang = array_shift($urlArray);
-        $url = str_replace(['/ru','/en','/gr','/es','/de'],'',$url);
+        $uri = str_replace(['/ru','/en','/gr','/es','/de'],'',$uri);
 
-        if($lang==$this->lexicon->defaultLang->code) return new Redirect($url);
+        if($lang==$this->lexicon->defaultLang->code) return new Redirect($uri);
 
         $this->lexicon->currentLang = new \Scern\Lira\Lexicon\Lang($lang);
-        if(empty($url)) $url = '/';
-        return new InternalRedirect($url);
+        if(empty($uri)) $uri = '/';
+        return new InternalRedirect($uri);
     }
 }

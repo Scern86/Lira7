@@ -2,6 +2,7 @@
 $langList = (new \Scern\Lira\View($this->lexicon))
     ->render(ROOT_DIR . DS . 'component' . DS . 'Front' . DS . 'templates' . DS . '_langs_select.inc');
 ?>
+
 <!doctype html>
 <html lang="<?= $this->lexicon->currentLang->code; ?>">
 <head>
@@ -10,37 +11,29 @@ $langList = (new \Scern\Lira\View($this->lexicon))
     <meta name="viewport"
           content="width=device-width, shrink-to-fit=no, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <?= $this->seo->render(); ?>
+    <?= $this->page->render($this->lexicon); ?>
     <link rel="icon" href="/favicon.ico?v0">
     <?= implode('', $this->headersLinks); ?>
 </head>
 <body data-default-lang="<?= $this->lexicon->defaultLang->code; ?>">
 <div class="content">
     <header>
-        <a class="logo" href="/">SCERN</a>
+        <a class="logo" href="<?= $this->makeLink('/'); ?>">LIRA</a>
         <div class="menu">
             <ul class="nav">
                 <li class="item"><a class="link"
-                                    href="<?= $this->makeLink('/'); ?>"><?= $this->lexicon->get('home'); ?></a></li>
-                <li class="item"><a class="link"
-                                    href="<?= $this->makeLink('/about'); ?>"><?= $this->lexicon->get('about'); ?></a>
+                                    href="<?= $this->makeLink('/'); ?>"><?= $this->lexicon->get('success', 'Success page'); ?></a>
                 </li>
                 <li class="item"><a class="link"
-                                    href="<?= $this->makeLink('/blog'); ?>"><?= $this->lexicon->get('blog'); ?></a></li>
-                <li class="item"><a class="link"
-                                    href="<?= $this->makeLink('/projects'); ?>"><?= $this->lexicon->get('projects'); ?></a>
+                                    href="<?= $this->makeLink('/error'); ?>"><?= $this->lexicon->get('error', 'Error page'); ?></a>
                 </li>
                 <li class="item"><a class="link"
-                                    href="<?= $this->makeLink('/contacts'); ?>"><?= $this->lexicon->get('contacts'); ?></a>
+                                    href="<?= $this->makeLink('/redirect'); ?>"><?= $this->lexicon->get('redirect', 'Redirect page'); ?></a>
                 </li>
                 <li class="item"><a class="link"
-                                    href="<?= $this->makeLink('/catalog'); ?>"><?= $this->lexicon->get('catalog'); ?></a>
+                                    href="<?= $this->makeLink('/internal'); ?>"><?= $this->lexicon->get('internal', 'Internal Redirect page'); ?></a>
                 </li>
-                <li class="item"><a class="link" href="<?= $this->makeLink('/profile'); ?>">Profile</a></li>
-                <li class="item"><a class="link" href="<?= $this->makeLink('/test'); ?>">Test redirect</a></li>
-                <li class="item"><a class="link" href="<?= $this->makeLink('/error'); ?>">Error</a></li>
-                <li class="item"><a class="link" href="<?= $this->makeLink('/admin'); ?>">Admin panel</a></li>
-                <li class="item"><a class="link" href="/api">API</a></li>
+                <li class="item"><a class="link" href="/json"><?= $this->lexicon->get('json', 'Json response'); ?></a></li>
             </ul>
             <div role="button" class="mobile-menu-btn"></div>
         </div>
@@ -55,39 +48,23 @@ $langList = (new \Scern\Lira\View($this->lexicon))
     </main>
     <footer>
         <div class="wrapper">
-            <div class="contacts">
-                <p><strong><?= $this->lexicon->get('contacts'); ?></strong></p>
-                <p>Phone: +1 (234) 567-89-01</p>
-                <p>Email: info@example.com</p>
-            </div>
+            <div class="contacts"></div>
             <div class="menu">
                 <ul class="nav">
                     <li class="item"><a class="link"
-                                        href="<?= $this->makeLink('/'); ?>"><?= $this->lexicon->get('home'); ?></a></li>
-                    <li class="item"><a class="link"
-                                        href="<?= $this->makeLink('/about'); ?>"><?= $this->lexicon->get('about'); ?></a>
+                                        href="<?= $this->makeLink('/'); ?>"><?= $this->lexicon->get('success', 'Success page'); ?></a>
                     </li>
                     <li class="item"><a class="link"
-                                        href="<?= $this->makeLink('/blog'); ?>"><?= $this->lexicon->get('blog'); ?></a>
+                                        href="<?= $this->makeLink('/error'); ?>"><?= $this->lexicon->get('error', 'Error page'); ?></a>
                     </li>
-                    <li class="item"><a class="link"
-                                        href="<?= $this->makeLink('/projects'); ?>"><?= $this->lexicon->get('projects'); ?></a>
-                    </li>
-                    <li class="item"><a class="link"
-                                        href="<?= $this->makeLink('/catalog'); ?>"><?= $this->lexicon->get('catalog'); ?></a>
-                    </li>
-                    <li class="item"><a class="link" href="<?= $this->makeLink('/profile'); ?>">Profile</a></li>
-                    <li class="item"><a class="link" href="<?= $this->makeLink('/test'); ?>">Test redirect</a></li>
-                    <li class="item"><a class="link" href="<?= $this->makeLink('/error'); ?>">Error</a></li>
-                    <li class="item"><a class="link" href="<?= $this->makeLink('/admin'); ?>">Admin panel</a></li>
-                    <li class="item"><a class="link" href="/api">API</a></li>
+                    <li class="item"><a class="link" href="/json"><?= $this->lexicon->get('json', 'Json response'); ?></a></li>
                 </ul>
                 <ul class="nav">
-                    <li class="item">
-                        <a class="link" href="/">LinkedIn</a>
+                    <li class="item"><a class="link"
+                                        href="<?= $this->makeLink('/redirect'); ?>"><?= $this->lexicon->get('redirect', 'Redirect page'); ?></a>
                     </li>
-                    <li class="item">
-                        <a class="link" href="/about">GitHub</a>
+                    <li class="item"><a class="link"
+                                        href="<?= $this->makeLink('/internal'); ?>"><?= $this->lexicon->get('internal', 'Internal Redirect page'); ?></a>
                     </li>
                 </ul>
             </div>

@@ -2,8 +2,6 @@
 
 namespace Scern\Lira\Lexicon;
 
-use Scern\Lira\Lexicon\Lang;
-
 class Lexicon
 {
     public Lang $currentLang;
@@ -19,8 +17,8 @@ class Lexicon
         return $this->lexicon[$langCode][$key] ?? $defaultValue;
     }
 
-    public function load(array $lexicon): void
+    public function addArray(array $array): void
     {
-        $this->lexicon = array_merge($this->lexicon,$lexicon);
+        $this->lexicon = array_merge($this->lexicon,$array);
     }
 }

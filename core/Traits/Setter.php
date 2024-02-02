@@ -4,7 +4,7 @@ namespace Scern\Lira\Traits;
 
 trait Setter
 {
-    private readonly bool $appendOnly;
+    protected readonly bool $appendOnly;
 
     public function __set(string $key, $value): void
     {
