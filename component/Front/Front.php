@@ -25,18 +25,20 @@ integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="ano
         $this->view->addLinkToBodysEnd('<script type="module" src="/assets/js/script.min.js?'.time().'"></script>');
         $this->lexicon->addArray([
             'ru'=>[
-                'success'=>'Успешно',
-                'error'=>'Ошибка',
+                'success'=>'Страница',
+                'error'=>'Страница с ошибкой',
                 'json'=>'JSON',
                 'redirect'=>'Редирект',
                 'internal'=>'Внутренний редирект',
+                'profile'=>'Страница авторизации',
             ],
             'en'=>[
-                'success'=>'Success',
-                'error'=>'Error',
+                'success'=>'Page',
+                'error'=>'Error page',
                 'json'=>'Json',
                 'redirect'=>'Redirect',
                 'internal'=>'Internal redirect',
+                'profile'=>'Auth page',
             ],
         ]);
     }

@@ -18,7 +18,7 @@ class Index extends Controller
         $articleModel = new ArticleModel($this->database->get('database'));
         $article = $articleModel->getArticleById(1,$this->lexicon->currentLang);
         $view = new View($this->lexicon);
-        $view->h1 = $page->h1;
+        $view->h1 = 'Success page'; //$page->h1;
         $view->article = $article;
         return new Success($view->render(ROOT_DIR.DS.'component'.DS.'Front'.DS.'Index'.DS.'template.inc'));
     }

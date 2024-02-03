@@ -6,16 +6,14 @@ use Scern\Lira\Database\Database;
 use Scern\Lira\Lexicon\Lang;
 use Scern\Lira\Model;
 
-readonly class PageModel extends Model
+class PageModel extends Model
 {
-    protected string $table;
-    protected string $tableContent;
+    protected string $table = 'web_pages';
+    protected string $tableContent = 'web_pages_content';
 
     public function __construct(Database $database)
     {
         parent::__construct($database);
-        $this->table = 'web_pages';
-        $this->tableContent = 'web_pages_content';
     }
     public function getPageById(int $id,Lang $lang): PageData
     {

@@ -15,6 +15,6 @@ readonly class UserData extends \Scern\Lira\Access\UserData
 
     public function isLoggedIn(): bool
     {
-        return true;
+        return $this->is_active;
     }
 }

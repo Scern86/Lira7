@@ -6,13 +6,15 @@ use Scern\Lira\Access\UserContract;
 use Scern\Lira\Database\Database;
 use Scern\Lira\Model;
 
-readonly class User extends Model implements UserContract
+class User extends Model implements UserContract
 {
     protected UserData $userData;
-    public function __construct(Database $database)
+
+    protected string $table = 'main_users';
+    public function __construct(Database $database,int $userId)
     {
         parent::__construct($database);
-        $this->userData = $this->loadUserData(2);
+        $this->userData = $this->loadUserData($userId);
     }
     public function isLoggedIn(): bool
     {
@@ -36,7 +38,7 @@ readonly class User extends Model implements UserContract
     protected function loadUserData(int $id): UserData
     {
         try{
-            $query = $this->db->prepare("SELECT id,login,name,is_active FROM main_users WHERE id = :id");
+            $query = $this->db->prepare("SELECT id,login,name,is_active FROM {$this->table} WHERE id = :id");
             $query->execute(['id'=>$id]);
             $result = $query->fetch(\PDO::FETCH_ASSOC);
             if(empty($result)) throw new \Exception('User not found');

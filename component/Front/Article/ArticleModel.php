@@ -7,16 +7,14 @@ use Scern\Lira\Database\Database;
 use Scern\Lira\Lexicon\Lang;
 use Scern\Lira\Model;
 
-readonly class ArticleModel extends Model
+class ArticleModel extends Model
 {
-    protected string $table;
-    protected string $tableContent;
+    protected string $table = 'web_articles';
+    protected string $tableContent = 'web_articles_content';
 
     public function __construct(Database $database)
     {
         parent::__construct($database);
-        $this->table = 'web_articles';
-        $this->tableContent = 'web_articles_content';
     }
     public function getArticleById(int $id,Lang $lang): ArticleData
     {

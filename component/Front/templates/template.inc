@@ -27,13 +27,17 @@ $langList = (new \Scern\Lira\View($this->lexicon))
                 <li class="item"><a class="link"
                                     href="<?= $this->makeLink('/error'); ?>"><?= $this->lexicon->get('error', 'Error page'); ?></a>
                 </li>
+                <li class="item"><a class="link" href="/json"><?= $this->lexicon->get('json', 'Json response'); ?></a>
+                </li>
+                <li class="item"><a class="link"
+                                    href="<?= $this->makeLink('/profile'); ?>"><?= $this->lexicon->get('profile', 'Auth page'); ?></a>
+                </li>
                 <li class="item"><a class="link"
                                     href="<?= $this->makeLink('/redirect'); ?>"><?= $this->lexicon->get('redirect', 'Redirect page'); ?></a>
                 </li>
                 <li class="item"><a class="link"
                                     href="<?= $this->makeLink('/internal'); ?>"><?= $this->lexicon->get('internal', 'Internal Redirect page'); ?></a>
                 </li>
-                <li class="item"><a class="link" href="/json"><?= $this->lexicon->get('json', 'Json response'); ?></a></li>
             </ul>
             <div role="button" class="mobile-menu-btn"></div>
         </div>
@@ -57,9 +61,13 @@ $langList = (new \Scern\Lira\View($this->lexicon))
                     <li class="item"><a class="link"
                                         href="<?= $this->makeLink('/error'); ?>"><?= $this->lexicon->get('error', 'Error page'); ?></a>
                     </li>
-                    <li class="item"><a class="link" href="/json"><?= $this->lexicon->get('json', 'Json response'); ?></a></li>
+                    <li class="item"><a class="link"
+                                        href="/json"><?= $this->lexicon->get('json', 'Json response'); ?></a></li>
                 </ul>
                 <ul class="nav">
+                    <li class="item"><a class="link"
+                                        href="<?= $this->makeLink('/profile'); ?>"><?= $this->lexicon->get('profile', 'Auth page'); ?></a>
+                    </li>
                     <li class="item"><a class="link"
                                         href="<?= $this->makeLink('/redirect'); ?>"><?= $this->lexicon->get('redirect', 'Redirect page'); ?></a>
                     </li>
