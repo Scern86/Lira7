@@ -11,7 +11,7 @@ $langList = (new \Scern\Lira\View($this->lexicon))
     <meta name="viewport"
           content="width=device-width, shrink-to-fit=no, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <?= $this->page->render($this->lexicon); ?>
+    <title>Admin</title>
     <link rel="icon" href="/favicon.ico?v0">
     <?= implode('', $this->headersLinks); ?>
 </head>
@@ -22,25 +22,14 @@ $langList = (new \Scern\Lira\View($this->lexicon))
         <div class="menu">
             <ul class="nav">
                 <li class="item"><a class="link"
-                                    href="<?= $this->makeLink('/'); ?>"><?= $this->lexicon->get('success', '200 Success'); ?></a>
+                                    href="<?= $this->makeLink('/admin'); ?>"><?= $this->lexicon->get('home', 'Home'); ?></a>
                 </li>
                 <li class="item"><a class="link"
-                                    href="<?= $this->makeLink('/error'); ?>"><?= $this->lexicon->get('error', '404 Error'); ?></a>
+                                    href="<?= $this->makeLink('/admin/page'); ?>"><?= $this->lexicon->get('page', 'Page'); ?></a>
                 </li>
-                <li class="item"><a class="link" href="/api"><?= $this->lexicon->get('json', '201 Json'); ?></a>
-                </li>
-                <li class="item"><a class="link"
-                                    href="<?= $this->makeLink('/profile'); ?>"><?= $this->lexicon->get('profile', 'Auth page'); ?></a>
-                </li>
-                <li class="item"><a class="link"
-                                    href="<?= $this->makeLink('/redirect'); ?>"><?= $this->lexicon->get('redirect', '307 Redirect'); ?></a>
-                </li>
-                <li class="item"><a class="link"
-                                    href="<?= $this->makeLink('/internal'); ?>"><?= $this->lexicon->get('internal', 'Internal Redirect'); ?></a>
-                </li>
-                <li class="item"><a class="link"
-                                    href="<?= $this->makeLink('/admin'); ?>"><?= $this->lexicon->get('admin', 'Admin component'); ?></a>
-                </li>
+                <?php if ($this->user->isLoggedIn()) { ?>
+                    <li class="item"><a class="link" href="<?= $this->makeLink('/admin/logout'); ?>">Logout</a></li>
+                <?php } ?>
             </ul>
             <div role="button" class="mobile-menu-btn"></div>
         </div>

@@ -32,6 +32,10 @@ html, body, div.content, header, main, footer {
   min-height: 100vh;
 }
 
+.fixed {
+  position: fixed;
+}
+
 /* Grid*/
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
@@ -58,7 +62,13 @@ header {
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  position: relative;
+  position: fixed;
+  height: 60px;
+}
+@media (min-width: 1140px) {
+  header {
+    height: 80px;
+  }
 }
 header .logo {
   display: block;
@@ -95,7 +105,7 @@ header .menu .nav {
 header .menu .nav.active {
   display: flex;
 }
-@media (min-width: 768px) {
+@media (min-width: 1140px) {
   header .menu .nav {
     display: flex;
     position: static;
@@ -119,7 +129,7 @@ header .menu .nav::before {
   font-size: 85px;
   transform: rotate(45deg);
 }
-@media (min-width: 768px) {
+@media (min-width: 1140px) {
   header .menu .nav::before {
     display: none;
   }
@@ -165,7 +175,7 @@ header .menu .mobile-menu-btn::after {
   height: 5px;
   border-bottom: 3px solid rgb(var(--color-white));
 }
-@media (min-width: 768px) {
+@media (min-width: 1140px) {
   header .menu .mobile-menu-btn {
     display: none;
   }
@@ -193,16 +203,18 @@ header .lang-select .lang.active {
 
 main {
   flex-grow: 1;
+  margin-top: 60px;
 }
 @media (min-width: 768px) {
   main {
     padding: 0 10px;
+    margin-top: 70px;
   }
 }
 @media (min-width: 1140px) {
   main {
     max-width: 1140px;
-    margin: 0 auto;
+    margin: 90px auto 0;
   }
 }
 main .wrapper {

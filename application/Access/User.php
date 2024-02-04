@@ -43,7 +43,8 @@ class User extends Model implements UserContract
             $result = $query->fetch(\PDO::FETCH_ASSOC);
             if(empty($result)) throw new \Exception('User not found');
             return new UserData(...$result);
-        }catch (\Exception $e){
+        }catch (\Throwable $e){
+            //var_dump($e);
             return new UserData();
         }
     }

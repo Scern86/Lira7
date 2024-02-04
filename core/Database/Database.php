@@ -3,5 +3,5 @@
 namespace Scern\Lira\Database;
 interface Database
 {
-    public function getDatabaseObject(): object;
+    public function getDatabaseObject(): ?object;
 }

@@ -6,9 +6,9 @@ use Scern\Lira\Database\Database;
 
 class Model
 {
-    protected object $db;
+    protected ?object $db;
     public function __construct(Database $database)
     {
-        $this->db = $database->getDatabaseObject();
+        $this->db = $database?->getDatabaseObject();
     }
 }

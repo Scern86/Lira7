@@ -11,6 +11,8 @@ use Scern\Lira\View;
 
 class Index extends Controller
 {
+    const CONTROLLER_DIR = ROOT_DIR.DS.'component'.DS.'Front'.DS.'Index';
+
     public function execute(string $uri): Result
     {
         $pageModel = new PageModel($this->database->get('database'));
@@ -20,6 +22,6 @@ class Index extends Controller
         $view = new View($this->lexicon);
         $view->h1 = 'Success page'; //$page->h1;
         $view->article = $article;
-        return new Success($view->render(ROOT_DIR.DS.'component'.DS.'Front'.DS.'Index'.DS.'template.inc'));
+        return new Success($view->render(self::CONTROLLER_DIR.DS.'template.inc'));
     }
 }

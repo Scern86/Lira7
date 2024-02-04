@@ -7,7 +7,7 @@ use Scern\Lira\Database\Database;
 
 readonly class Postgresql implements Database
 {
-    protected \PDO $db;
+    protected ?\PDO $db;
 
     public function __construct(Source $params)
     {
@@ -17,11 +17,12 @@ readonly class Postgresql implements Database
         }catch (\PDOException $e){
             //var_dump($e);
             //TODO log
-            throw new \Exception('Have not connect to database');
+            //throw new \Exception('No connection to database');
+            $this->db = null;
         }
     }
 
-    public function getDatabaseObject(): object
+    public function getDatabaseObject(): ?object
     {
         return $this->db;
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Scern\Lira\Component\Front\Access;
+namespace Scern\Lira\Component\Admin\Access;
 
 use Scern\Lira\Application\Access\{Login,LoginData};
 use Scern\Lira\Database\Database;
@@ -12,6 +12,7 @@ class User extends \Scern\Lira\Application\Access\User
 
     public function __construct(Database $database, protected string $ssid, protected string $ipAddress, protected string $component)
     {
+        $this->table = 'admin_users';
         $this->login = new Login($database, $ssid, $ipAddress, $component);
         $this->loginData = $this->login->getData();
         parent::__construct($database, $this->loginData->id_user);

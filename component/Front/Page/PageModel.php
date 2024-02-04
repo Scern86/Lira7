@@ -30,7 +30,7 @@ FROM {$this->table} AS p,{$this->tableContent} AS pc
             $result = $query->fetch(\PDO::FETCH_ASSOC);
             if(empty($result)) throw new \Exception('Page not found');
             return new PageData(...$result);
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             return new PageData();
         }
     }

@@ -1,11 +1,13 @@
 main{
   flex-grow: 1;
+  margin-top: 60px;
   @include breakpointMin(md) {
     padding: 0 10px;
+    margin-top: 70px;
   }
   @include breakpointMin(xl) {
     max-width: 1140px;
-    margin: 0 auto;
+    margin: 90px auto 0;
   }
   & .wrapper{
     box-sizing: border-box;

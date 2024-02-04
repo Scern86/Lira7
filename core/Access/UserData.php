@@ -6,6 +6,6 @@ readonly class UserData
 {
     public function isLoggedIn(): bool
     {
-        return true;
+        return false;
     }
 }

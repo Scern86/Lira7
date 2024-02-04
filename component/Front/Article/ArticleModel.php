@@ -31,7 +31,7 @@ FROM {$this->table} AS a,{$this->tableContent} AS ac
             $result = $query->fetch(\PDO::FETCH_ASSOC);
             if(empty($result)) throw new \Exception('Article not found');
             return new ArticleData(...$result);
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             return new ArticleData();
         }
     }

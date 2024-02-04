@@ -15,9 +15,9 @@ $configDir = ROOT_DIR.DS.'config';
 $request = Request::createFromGlobals();
 
 $config = new Manager();
-$config->set('main',new PhpFile($configDir.DS.'main.php'));
+$config->set('main',new PhpFile(CONFIG_DIR.DS.'main.php'));
 
-$router = new Router(DefaultController::class,new PhpFile($configDir.DS.'routes.php'));
+$router = new Router(DefaultController::class,new PhpFile(CONFIG_DIR.DS.'routes.php'));
 
 $lexicon = new Lexicon(new Lang($config->main->defaultLanguage),$config->main->languagesList);
 $view = new View($lexicon);

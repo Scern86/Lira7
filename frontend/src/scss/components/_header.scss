@@ -5,7 +5,15 @@ header{
   align-items: center;
   justify-content: space-between;
   gap:20px;
-  position: relative;
+  position: fixed;
+  height: 60px;
+  @include breakpointMin(md) {
+
+  }
+  @include breakpointMin(xl) {
+    height: 80px;
+  }
+
   & .logo{
     display: block;
     color: rgb(var(--color-white));
@@ -38,7 +46,7 @@ header{
       &.active{
         display: flex;
       }
-      @include breakpointMin(md) {
+      @include breakpointMin(xl) {
         display: flex;
         position: static;
         top:auto;
@@ -59,7 +67,7 @@ header{
         color: rgb(var(--color-white));
         font-size: 85px;
         transform: rotate(45deg);
-        @include breakpointMin(md) {
+        @include breakpointMin(xl) {
           display: none;
         }
       }
@@ -107,9 +115,10 @@ header{
         height: 5px;
         border-bottom: 3px solid rgb(var(--color-white));
       }
-      @include breakpointMin(md) {
+      @include breakpointMin(xl) {
         display: none;
       }
+
     }
   }
 

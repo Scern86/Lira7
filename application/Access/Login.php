@@ -75,7 +75,8 @@ class Login extends Model
             $result = $query->fetch(\PDO::FETCH_ASSOC);
             if (empty($result)) throw new \Exception('That user was not logged in yet');
             return new LoginData(...$result);
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
+            //var_dump($e);
             return new LoginData();
         }
     }

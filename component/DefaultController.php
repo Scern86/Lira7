@@ -2,7 +2,7 @@
 
 namespace Scern\Lira\Component;
 
-use Scern\Lira\Controller;
+use Scern\Lira\Application\Controller;
 use Scern\Lira\Results\Result;
 use Scern\Lira\Application\Results\Error;
 use Symfony\Component\HttpFoundation\Response;

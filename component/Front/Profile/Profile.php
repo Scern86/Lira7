@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class Profile extends Controller
 {
-
+    const CONTROLLER_DIR = ROOT_DIR.DS.'component'.DS.'Front'.DS.'Profile';
     public function __construct(
         Request                      $request,
         Session                      $session,
@@ -63,7 +63,7 @@ class Profile extends Controller
         }
 
         $view = new View($this->lexicon);
-        return new Success($view->render(ROOT_DIR.DS.'component'.DS.'Front'.DS.'Profile'.DS.'templates'.DS.'guest.inc'));
+        return new Success($view->render(self::CONTROLLER_DIR.DS.'templates'.DS.'guest.inc'));
     }
     protected function logout(): Result
     {
@@ -74,6 +74,6 @@ class Profile extends Controller
     {
         $view = new View($this->lexicon);
         if(!$this->user->isLoggedIn()) return new Redirect($this->view->makeLink('/profile/login'));
-        return new Success($view->render(ROOT_DIR.DS.'component'.DS.'Front'.DS.'Profile'.DS.'templates'.DS.'user.inc'));
+        return new Success($view->render(self::CONTROLLER_DIR.DS.'templates'.DS.'user.inc'));
     }
 }

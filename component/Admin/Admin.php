@@ -1,41 +1,49 @@
 <?php
 
-namespace Scern\Lira\Component\Front;
+namespace Scern\Lira\Component\Admin;
 
 use Scern\Lira\Application\Controller;
 use Scern\Lira\Application\Results\{Error, InternalRedirect, Json, Redirect, Success,};
 use Scern\Lira\Component\DefaultController;
-use Scern\Lira\Component\Front\Page\PageData;
 use Scern\Lira\Config\PhpFile;
 use Scern\Lira\Database\Adapters\Postgresql;
 use Scern\Lira\Results\Result;
-use Scern\Lira\Router;
+use Scern\Lira\{Access\UserContract, Component\Admin\Access\User, Lexicon\Lexicon, Router, Session, View};
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class Front extends Controller
+class Admin extends Controller
 {
-    const COMPONENT_DIR = ROOT_DIR . DS . 'component' . DS . 'Front';
-    public function __construct($request,$session,$config,$view,$user,$lexicon,$database,$cache,$logger)
+    const COMPONENT_DIR = ROOT_DIR . DS . 'component' . DS . 'Admin';
+    public function __construct(
+        Request                      $request,
+        Session                      $session,
+        \Scern\Lira\Config\Manager   $config,
+        View                         $view,
+        UserContract                 $user,
+        Lexicon                      $lexicon,
+        \Scern\Lira\Database\Manager $database,
+        \Scern\Lira\Cache\Manager    $cache,
+        \Scern\Lira\Logger\Manager   $logger
+    )
     {
-        $view = new View($lexicon,new PageData());
+        $view = new View($lexicon);
+        $session->init();
+        $database->set('database',new Postgresql(new PhpFile(CONFIG_DIR.DS.'database.php')));
+        $view->user = $user = new User($database->get('database'),$session->session_id,$request->getClientIp(),'Admin');
         parent::__construct($request,$session,$config,$view,$user,$lexicon,$database,$cache,$logger);
         $this->database->set('database',new Postgresql(new PhpFile(CONFIG_DIR.DS.'database.php')));
         $this->view->addLinkToHeader('<link rel="stylesheet" href="/assets/css/style.min.css?'.time().'">');
         $this->view->addLinkToBodysEnd('<script defer src="https://code.jquery.com/jquery-3.7.1.min.js" 
 integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>');
         $this->view->addLinkToBodysEnd('<script type="module" src="/assets/js/script.min.js?'.time().'"></script>');
-        $this->lexicon->addArray([
-            'ru'=>[
-                'profile'=>'Страница авторизации',
-            ],
-            'en'=>[
-                'profile'=>'Auth page',
-            ],
-        ]);
     }
 
     public function execute(string $uri): Result
     {
+        $uri = str_replace('/admin','',$uri);
+        if(empty($uri)) $uri = '/';
+
         try {
             $router = new Router(
                 DefaultController::class,
@@ -43,7 +51,6 @@ integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="ano
             );
 
             $controllerClass = $router->execute($uri);
-
             $controller = new $controllerClass(
                 $this->request,
                 $this->session,
@@ -62,7 +69,7 @@ integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="ano
                 case Success::class:
                 case Error::class:
                     $this->view->content = $result->content;
-                    return new Success($this->view->render(self::COMPONENT_DIR . DS . 'templates' . DS . 'template.inc'),$result->statusCode,$result->headers);
+                    return new Error($this->view->render(self::COMPONENT_DIR . DS . 'templates' . DS . 'template.inc'),$result->statusCode,$result->headers);
                 case Json::class:
                 case Redirect::class:
                 case InternalRedirect::class:
