@@ -44,7 +44,9 @@ $langList = (new \Scern\Lira\View($this->lexicon))
     </main>
     <footer>
         <div class="wrapper">
-            <div class="contacts"></div>
+            <div class="contacts">
+                <strong>Contacts</strong>
+            </div>
             <div class="menu">
                 <ul class="nav">
                     <li class="item"><a class="link"

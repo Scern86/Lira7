@@ -2,20 +2,31 @@
 
 namespace Scern\Lira\Component\Admin\Access;
 
-use Scern\Lira\Application\Access\{Login,LoginData};
+use Scern\Lira\Access\Permissions;
+use Scern\Lira\Application\Access\{Login, LoginData};
 use Scern\Lira\Database\Database;
 
 class User extends \Scern\Lira\Application\Access\User
 {
+    protected string $table = 'admin_users';
+
     protected Login $login;
     protected LoginData $loginData;
 
-    public function __construct(Database $database, protected string $ssid, protected string $ipAddress, protected string $component)
+    protected Permissions $permissions;
+
+    public function __construct(
+        Database $database,
+        protected string $ssid,
+        protected string $ipAddress,
+        protected string $component
+    )
     {
-        $this->table = 'admin_users';
         $this->login = new Login($database, $ssid, $ipAddress, $component);
         $this->loginData = $this->login->getData();
         parent::__construct($database, $this->loginData->id_user);
+        $group = new Group($database,$this->loginData->id_user);
+        $this->permissions = $group->getData();
     }
 
     public function login(string $login = '', string $password = ''): bool
@@ -51,5 +62,10 @@ class User extends \Scern\Lira\Application\Access\User
             //var_dump($e);
             return null;
         }
+    }
+
+    public function isMethodAllowed(string $method): bool
+    {
+        return $this->permissions->isMethodAllowed($method);
     }
 }

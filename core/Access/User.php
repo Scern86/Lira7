@@ -22,4 +22,9 @@ readonly class User implements UserContract
     public function logout(): void
     {
     }
+
+    public function isMethodAllowed(string $method): bool
+    {
+        return false;
+    }
 }

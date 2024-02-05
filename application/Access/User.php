@@ -48,4 +48,9 @@ class User extends Model implements UserContract
             return new UserData();
         }
     }
+
+    public function isMethodAllowed(string $method): bool
+    {
+        return false;
+    }
 }
